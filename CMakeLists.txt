@@ -12,4 +12,7 @@ add_executable(autotierx
     src/storage/StorageManager.cpp
     src/db/ObjectMetadata.cpp
     src/core/ObjectManager.cpp
+    src/db/DatabaseManager.cpp
 )
+
+target_link_libraries(autotierx sqlite3)

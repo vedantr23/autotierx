@@ -1,6 +1,6 @@
 #ifndef OBJECT_METADATA_HPP
 #define OBJECT_METADATA_HPP
-
+#include "../db/DatabaseManager.hpp"
 #include <string>
 
 namespace autotierx {
@@ -16,6 +16,7 @@ private:
     std::string createdAt;
     std::string lastAccessed;
     std::string checksum;
+    DatabaseManager databaseManager;
 
 public:
     ObjectMetadata(

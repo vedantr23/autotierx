@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/vedant/autotierx/main.cpp" "CMakeFiles/autotierx.dir/main.cpp.o" "gcc" "CMakeFiles/autotierx.dir/main.cpp.o.d"
   "/home/vedant/autotierx/src/core/ObjectManager.cpp" "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o.d"
+  "/home/vedant/autotierx/src/db/DatabaseManager.cpp" "CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o.d"
   "/home/vedant/autotierx/src/db/ObjectMetadata.cpp" "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o.d"
   "/home/vedant/autotierx/src/storage/StorageManager.cpp" "CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o.d"
   "/home/vedant/autotierx/src/storage/StorageTier.cpp" "CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o.d"

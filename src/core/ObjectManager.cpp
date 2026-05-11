@@ -1,4 +1,5 @@
 #include "../../include/core/ObjectManager.hpp"
+#include "../../include/db/DatabaseManager.hpp"
 
 #include <filesystem>
 #include <iostream>
@@ -18,6 +19,7 @@ void ObjectManager::ingestObject(
         fs::path source(sourcePath);
 
         if (!fs::exists(source)) {
+
             std::cout << "File does not exist!" << std::endl;
             return;
         }
@@ -53,13 +55,30 @@ void ObjectManager::ingestObject(
 
         objects.push_back(metadata);
 
+        DatabaseManager databaseManager;
+
+        databaseManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+
+        databaseManager.createMetadataTable();
+
+        databaseManager.insertObjectMetadata(
+            "OBJ_" + filename,
+            filename,
+            destinationPath,
+            "HOT",
+            size
+        );
+
         std::cout << std::endl;
         std::cout << "[UPLOAD SUCCESS]" << std::endl;
+
         metadata.printMetadata();
 
     } catch (const std::exception& e) {
 
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cout << "Error: "
+                  << e.what()
+                  << std::endl;
     }
 }
 
@@ -69,9 +88,12 @@ void ObjectManager::printAllObjects() const {
     std::cout << "===== STORED OBJECTS =====" << std::endl;
 
     for (const auto& object : objects) {
+
         object.printMetadata();
 
-        std::cout << "--------------------" << std::endl;
+        std::cout
+            << "--------------------"
+            << std::endl;
     }
 }
 

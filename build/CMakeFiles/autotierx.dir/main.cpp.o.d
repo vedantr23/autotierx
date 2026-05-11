@@ -157,5 +157,8 @@ CMakeFiles/autotierx.dir/main.cpp.o: /home/vedant/autotierx/main.cpp \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
  /home/vedant/autotierx/include/db/ObjectMetadata.hpp \
+ /home/vedant/autotierx/include/db/../db/DatabaseManager.hpp \
+ /usr/include/sqlite3.h \
  /home/vedant/autotierx/include/core/ObjectManager.hpp \
- /home/vedant/autotierx/include/core/../db/ObjectMetadata.hpp
+ /home/vedant/autotierx/include/core/../db/ObjectMetadata.hpp \
+ /home/vedant/autotierx/include/db/DatabaseManager.hpp

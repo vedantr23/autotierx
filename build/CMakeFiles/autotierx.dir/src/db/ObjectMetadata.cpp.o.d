@@ -2,6 +2,8 @@ CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o: \
  /home/vedant/autotierx/src/db/ObjectMetadata.cpp \
  /usr/include/stdc-predef.h \
  /home/vedant/autotierx/src/db/../../include/db/ObjectMetadata.hpp \
+ /home/vedant/autotierx/src/db/../../include/db/../db/DatabaseManager.hpp \
+ /usr/include/sqlite3.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -23,7 +25,6 @@ CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \

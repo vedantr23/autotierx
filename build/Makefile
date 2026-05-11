@@ -177,6 +177,30 @@ src/core/ObjectManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s
 .PHONY : src/core/ObjectManager.cpp.s
 
+src/db/DatabaseManager.o: src/db/DatabaseManager.cpp.o
+.PHONY : src/db/DatabaseManager.o
+
+# target to build an object file
+src/db/DatabaseManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o
+.PHONY : src/db/DatabaseManager.cpp.o
+
+src/db/DatabaseManager.i: src/db/DatabaseManager.cpp.i
+.PHONY : src/db/DatabaseManager.i
+
+# target to preprocess a source file
+src/db/DatabaseManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.i
+.PHONY : src/db/DatabaseManager.cpp.i
+
+src/db/DatabaseManager.s: src/db/DatabaseManager.cpp.s
+.PHONY : src/db/DatabaseManager.s
+
+# target to generate assembly for a file
+src/db/DatabaseManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.s
+.PHONY : src/db/DatabaseManager.cpp.s
+
 src/db/ObjectMetadata.o: src/db/ObjectMetadata.cpp.o
 .PHONY : src/db/ObjectMetadata.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... src/core/ObjectManager.o"
 	@echo "... src/core/ObjectManager.i"
 	@echo "... src/core/ObjectManager.s"
+	@echo "... src/db/DatabaseManager.o"
+	@echo "... src/db/DatabaseManager.i"
+	@echo "... src/db/DatabaseManager.s"
 	@echo "... src/db/ObjectMetadata.o"
 	@echo "... src/db/ObjectMetadata.i"
 	@echo "... src/db/ObjectMetadata.s"

@@ -3,6 +3,7 @@
 #include "storage/StorageManager.hpp"
 #include "db/ObjectMetadata.hpp"
 #include "core/ObjectManager.hpp"
+#include "db/DatabaseManager.hpp"
 
 using namespace autotierx;
 
@@ -74,6 +75,15 @@ objectManager.ingestObject(
 );
 
 objectManager.printAllObjects();
+
+DatabaseManager dbManager;
+
+dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+
+std::cout << std::endl;
+std::cout << "===== DATABASE CONTENT =====" << std::endl;
+
+dbManager.printAllMetadata();
 
     return 0;
 }
