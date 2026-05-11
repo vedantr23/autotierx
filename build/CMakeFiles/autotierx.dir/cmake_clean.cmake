@@ -1,6 +1,14 @@
 file(REMOVE_RECURSE
   "CMakeFiles/autotierx.dir/main.cpp.o"
   "CMakeFiles/autotierx.dir/main.cpp.o.d"
+  "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o"
+  "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o.d"
+  "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o"
+  "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o.d"
+  "CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o"
+  "CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o.d"
+  "CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o"
+  "CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o.d"
   "autotierx"
   "autotierx.pdb"
 )

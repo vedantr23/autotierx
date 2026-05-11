@@ -83,17 +83,81 @@ CMakeFiles/autotierx.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/main.cpp -o CMakeFiles/autotierx.dir/main.cpp.s
 
+CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o: /home/vedant/autotierx/src/storage/StorageTier.cpp
+CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o -MF CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o.d -o CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o -c /home/vedant/autotierx/src/storage/StorageTier.cpp
+
+CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/storage/StorageTier.cpp > CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.i
+
+CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/storage/StorageTier.cpp -o CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.s
+
+CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o: /home/vedant/autotierx/src/storage/StorageManager.cpp
+CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o -MF CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o.d -o CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o -c /home/vedant/autotierx/src/storage/StorageManager.cpp
+
+CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/storage/StorageManager.cpp > CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.i
+
+CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/storage/StorageManager.cpp -o CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.s
+
+CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o: /home/vedant/autotierx/src/db/ObjectMetadata.cpp
+CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o -MF CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o.d -o CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o -c /home/vedant/autotierx/src/db/ObjectMetadata.cpp
+
+CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/db/ObjectMetadata.cpp > CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.i
+
+CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/db/ObjectMetadata.cpp -o CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.s
+
+CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o: /home/vedant/autotierx/src/core/ObjectManager.cpp
+CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o -MF CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o.d -o CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o -c /home/vedant/autotierx/src/core/ObjectManager.cpp
+
+CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/core/ObjectManager.cpp > CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.i
+
+CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/core/ObjectManager.cpp -o CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s
+
 # Object files for target autotierx
 autotierx_OBJECTS = \
-"CMakeFiles/autotierx.dir/main.cpp.o"
+"CMakeFiles/autotierx.dir/main.cpp.o" \
+"CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o" \
+"CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o" \
+"CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o" \
+"CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o"
 
 # External object files for target autotierx
 autotierx_EXTERNAL_OBJECTS =
 
 autotierx: CMakeFiles/autotierx.dir/main.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o
 autotierx: CMakeFiles/autotierx.dir/build.make
 autotierx: CMakeFiles/autotierx.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable autotierx"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable autotierx"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/autotierx.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

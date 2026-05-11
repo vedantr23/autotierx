@@ -153,6 +153,102 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/core/ObjectManager.o: src/core/ObjectManager.cpp.o
+.PHONY : src/core/ObjectManager.o
+
+# target to build an object file
+src/core/ObjectManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o
+.PHONY : src/core/ObjectManager.cpp.o
+
+src/core/ObjectManager.i: src/core/ObjectManager.cpp.i
+.PHONY : src/core/ObjectManager.i
+
+# target to preprocess a source file
+src/core/ObjectManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.i
+.PHONY : src/core/ObjectManager.cpp.i
+
+src/core/ObjectManager.s: src/core/ObjectManager.cpp.s
+.PHONY : src/core/ObjectManager.s
+
+# target to generate assembly for a file
+src/core/ObjectManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s
+.PHONY : src/core/ObjectManager.cpp.s
+
+src/db/ObjectMetadata.o: src/db/ObjectMetadata.cpp.o
+.PHONY : src/db/ObjectMetadata.o
+
+# target to build an object file
+src/db/ObjectMetadata.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o
+.PHONY : src/db/ObjectMetadata.cpp.o
+
+src/db/ObjectMetadata.i: src/db/ObjectMetadata.cpp.i
+.PHONY : src/db/ObjectMetadata.i
+
+# target to preprocess a source file
+src/db/ObjectMetadata.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.i
+.PHONY : src/db/ObjectMetadata.cpp.i
+
+src/db/ObjectMetadata.s: src/db/ObjectMetadata.cpp.s
+.PHONY : src/db/ObjectMetadata.s
+
+# target to generate assembly for a file
+src/db/ObjectMetadata.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.s
+.PHONY : src/db/ObjectMetadata.cpp.s
+
+src/storage/StorageManager.o: src/storage/StorageManager.cpp.o
+.PHONY : src/storage/StorageManager.o
+
+# target to build an object file
+src/storage/StorageManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o
+.PHONY : src/storage/StorageManager.cpp.o
+
+src/storage/StorageManager.i: src/storage/StorageManager.cpp.i
+.PHONY : src/storage/StorageManager.i
+
+# target to preprocess a source file
+src/storage/StorageManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.i
+.PHONY : src/storage/StorageManager.cpp.i
+
+src/storage/StorageManager.s: src/storage/StorageManager.cpp.s
+.PHONY : src/storage/StorageManager.s
+
+# target to generate assembly for a file
+src/storage/StorageManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.s
+.PHONY : src/storage/StorageManager.cpp.s
+
+src/storage/StorageTier.o: src/storage/StorageTier.cpp.o
+.PHONY : src/storage/StorageTier.o
+
+# target to build an object file
+src/storage/StorageTier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o
+.PHONY : src/storage/StorageTier.cpp.o
+
+src/storage/StorageTier.i: src/storage/StorageTier.cpp.i
+.PHONY : src/storage/StorageTier.i
+
+# target to preprocess a source file
+src/storage/StorageTier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.i
+.PHONY : src/storage/StorageTier.cpp.i
+
+src/storage/StorageTier.s: src/storage/StorageTier.cpp.s
+.PHONY : src/storage/StorageTier.s
+
+# target to generate assembly for a file
+src/storage/StorageTier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.s
+.PHONY : src/storage/StorageTier.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +261,18 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/core/ObjectManager.o"
+	@echo "... src/core/ObjectManager.i"
+	@echo "... src/core/ObjectManager.s"
+	@echo "... src/db/ObjectMetadata.o"
+	@echo "... src/db/ObjectMetadata.i"
+	@echo "... src/db/ObjectMetadata.s"
+	@echo "... src/storage/StorageManager.o"
+	@echo "... src/storage/StorageManager.i"
+	@echo "... src/storage/StorageManager.s"
+	@echo "... src/storage/StorageTier.o"
+	@echo "... src/storage/StorageTier.i"
+	@echo "... src/storage/StorageTier.s"
 .PHONY : help
 
 
