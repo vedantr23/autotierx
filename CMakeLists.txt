@@ -13,6 +13,9 @@ add_executable(autotierx
     src/db/ObjectMetadata.cpp
     src/core/ObjectManager.cpp
     src/db/DatabaseManager.cpp
+    src/migration/MigrationEngine.cpp
+    src/classifier/TieringPolicy.cpp
+    src/migration/AutoTieringEngine.cpp
 )
 
 target_link_libraries(autotierx sqlite3)

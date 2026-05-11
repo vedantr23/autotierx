@@ -1,13 +1,22 @@
 #include <iostream>
+
 #include "storage/StorageTier.hpp"
 #include "storage/StorageManager.hpp"
 #include "db/ObjectMetadata.hpp"
-#include "core/ObjectManager.hpp"
 #include "db/DatabaseManager.hpp"
+#include "core/ObjectManager.hpp"
+#include "migration/MigrationEngine.hpp"
+#include "migration/AutoTieringEngine.hpp"
 
 using namespace autotierx;
 
 int main() {
+
+    /*
+    =========================================
+    STORAGE MANAGER
+    =========================================
+    */
 
     StorageManager manager;
 
@@ -48,42 +57,114 @@ int main() {
     manager.addTier(cold);
     manager.addTier(archive);
 
+    /*
+    =========================================
+    PRINT ALL TIERS
+    =========================================
+    */
+
+    std::cout << std::endl;
+    std::cout << "===== STORAGE TIERS ====="
+              << std::endl;
+
     manager.printAllTiers();
 
+    /*
+    =========================================
+    SAMPLE METADATA OBJECT
+    =========================================
+    */
+
     ObjectMetadata file1(
-    "OBJ001",
-    "video.mp4",
-    "/home/vedant/hot-storage/video.mp4",
-    "HOT",
-    104857600,
-    12,
-    "2026-05-11",
-    "2026-05-11",
-    "abc123checksum"
-);
+        "OBJ001",
+        "video.mp4",
+        "/home/vedant/hot-storage/video.mp4",
+        "HOT",
+        104857600,
+        12,
+        "2026-05-11",
+        "2026-05-11",
+        "abc123checksum"
+    );
 
-std::cout << std::endl;
-std::cout << "===== OBJECT METADATA =====" << std::endl;
+    std::cout << std::endl;
+    std::cout << "===== OBJECT METADATA ====="
+              << std::endl;
 
-file1.printMetadata();
+    file1.printMetadata();
 
-ObjectManager objectManager;
+    /*
+    =========================================
+    OBJECT MANAGER
+    =========================================
+    */
 
-objectManager.ingestObject(
-    "/home/vedant/autotierx/input/sample.txt",
-    "/home/vedant/hot-storage"
-);
+    ObjectManager objectManager;
 
-objectManager.printAllObjects();
+    objectManager.ingestObject(
+        "/home/vedant/autotierx/input/sample.txt",
+        "/home/vedant/hot-storage"
+    );
 
-DatabaseManager dbManager;
+    std::cout << std::endl;
+    std::cout << "===== STORED OBJECTS ====="
+              << std::endl;
 
-dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+    objectManager.printAllObjects();
 
-std::cout << std::endl;
-std::cout << "===== DATABASE CONTENT =====" << std::endl;
+    /*
+    =========================================
+    DATABASE MANAGER
+    =========================================
+    */
 
-dbManager.printAllMetadata();
+    DatabaseManager dbManager;
+
+    dbManager.connect(
+        "/home/vedant/autotierx/metadata/metadata.db"
+    );
+
+    std::cout << std::endl;
+    std::cout << "===== DATABASE CONTENT ====="
+              << std::endl;
+
+    dbManager.printAllMetadata();
+
+    /*
+    =========================================
+    MIGRATION ENGINE
+    =========================================
+    */
+
+    MigrationEngine migrationEngine;
+
+    migrationEngine.migrateObject(
+        "/home/vedant/hot-storage/sample.txt",
+        "/media/vedant/warm"
+    );
+
+    /*
+    =========================================
+    AUTO TIERING ENGINE
+    =========================================
+    */
+
+    AutoTieringEngine autoEngine;
+
+    autoEngine.evaluateAndMigrate(
+        objectManager.getObjects()
+    );
+
+    /*
+    =========================================
+    FINISHED
+    =========================================
+    */
+
+    std::cout << std::endl;
+    std::cout
+        << "===== AUTOTIERX EXECUTION COMPLETE ====="
+        << std::endl;
 
     return 0;
 }

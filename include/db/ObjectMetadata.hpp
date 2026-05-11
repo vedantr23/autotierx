@@ -1,24 +1,30 @@
-#ifndef OBJECT_METADATA_HPP
-#define OBJECT_METADATA_HPP
-#include "../db/DatabaseManager.hpp"
+#pragma once
+
 #include <string>
+#include <iostream>
 
 namespace autotierx {
 
 class ObjectMetadata {
+
 private:
+
     std::string objectId;
     std::string filename;
     std::string path;
     std::string tier;
+
     long sizeBytes;
+
     int accessCount;
+
     std::string createdAt;
     std::string lastAccessed;
+
     std::string checksum;
-    DatabaseManager databaseManager;
 
 public:
+
     ObjectMetadata(
         const std::string& objectId,
         const std::string& filename,
@@ -31,9 +37,47 @@ public:
         const std::string& checksum
     );
 
+    /*
+    =====================================
+    PRINT
+    =====================================
+    */
+
     void printMetadata() const;
+
+    /*
+    =====================================
+    GETTERS
+    =====================================
+    */
+
+    std::string getObjectId() const;
+
+    std::string getFilename() const;
+
+    std::string getPath() const;
+
+    std::string getTier() const;
+
+    long getSizeBytes() const;
+
+    int getAccessCount() const;
+
+    std::string getCreatedAt() const;
+
+    std::string getLastAccessed() const;
+
+    std::string getChecksum() const;
+
+    /*
+    =====================================
+    SETTERS
+    =====================================
+    */
+
+    void setTier(const std::string& newTier);
+
+    void incrementAccessCount();
 };
 
 }
-
-#endif

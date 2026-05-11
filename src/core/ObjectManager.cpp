@@ -20,14 +20,24 @@ void ObjectManager::ingestObject(
 
         if (!fs::exists(source)) {
 
-            std::cout << "File does not exist!" << std::endl;
+            std::cout
+                << "File does not exist!"
+                << std::endl;
+
             return;
         }
 
-        std::string filename = source.filename();
+        std::string filename =
+            source.filename();
 
         std::string destinationPath =
             destinationTier + "/" + filename;
+
+        /*
+        =====================================
+        COPY FILE TO STORAGE TIER
+        =====================================
+        */
 
         fs::copy_file(
             source,
@@ -35,11 +45,31 @@ void ObjectManager::ingestObject(
             fs::copy_options::overwrite_existing
         );
 
-        long size = fs::file_size(destinationPath);
+        /*
+        =====================================
+        GET FILE SIZE
+        =====================================
+        */
 
-        auto now = std::chrono::system_clock::to_time_t(
-            std::chrono::system_clock::now()
-        );
+        long size =
+            fs::file_size(destinationPath);
+
+        /*
+        =====================================
+        GET CURRENT TIME
+        =====================================
+        */
+
+        auto now =
+            std::chrono::system_clock::to_time_t(
+                std::chrono::system_clock::now()
+            );
+
+        /*
+        =====================================
+        CREATE METADATA OBJECT
+        =====================================
+        */
 
         ObjectMetadata metadata(
             "OBJ_" + filename,
@@ -53,11 +83,25 @@ void ObjectManager::ingestObject(
             "dummy-checksum"
         );
 
+        /*
+        =====================================
+        STORE IN MEMORY
+        =====================================
+        */
+
         objects.push_back(metadata);
+
+        /*
+        =====================================
+        DATABASE OPERATIONS
+        =====================================
+        */
 
         DatabaseManager databaseManager;
 
-        databaseManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        databaseManager.connect(
+            "/home/vedant/autotierx/metadata/metadata.db"
+        );
 
         databaseManager.createMetadataTable();
 
@@ -69,23 +113,36 @@ void ObjectManager::ingestObject(
             size
         );
 
+        /*
+        =====================================
+        SUCCESS LOGS
+        =====================================
+        */
+
         std::cout << std::endl;
-        std::cout << "[UPLOAD SUCCESS]" << std::endl;
+
+        std::cout
+            << "[UPLOAD SUCCESS]"
+            << std::endl;
 
         metadata.printMetadata();
 
     } catch (const std::exception& e) {
 
-        std::cout << "Error: "
-                  << e.what()
-                  << std::endl;
+        std::cout
+            << "Error: "
+            << e.what()
+            << std::endl;
     }
 }
 
 void ObjectManager::printAllObjects() const {
 
     std::cout << std::endl;
-    std::cout << "===== STORED OBJECTS =====" << std::endl;
+
+    std::cout
+        << "===== STORED OBJECTS ====="
+        << std::endl;
 
     for (const auto& object : objects) {
 
@@ -95,6 +152,18 @@ void ObjectManager::printAllObjects() const {
             << "--------------------"
             << std::endl;
     }
+}
+
+/*
+=====================================
+GETTER FUNCTION
+=====================================
+*/
+
+std::vector<ObjectMetadata>&
+ObjectManager::getObjects() {
+
+    return objects;
 }
 
 }

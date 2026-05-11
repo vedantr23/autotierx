@@ -153,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/classifier/TieringPolicy.o: src/classifier/TieringPolicy.cpp.o
+.PHONY : src/classifier/TieringPolicy.o
+
+# target to build an object file
+src/classifier/TieringPolicy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o
+.PHONY : src/classifier/TieringPolicy.cpp.o
+
+src/classifier/TieringPolicy.i: src/classifier/TieringPolicy.cpp.i
+.PHONY : src/classifier/TieringPolicy.i
+
+# target to preprocess a source file
+src/classifier/TieringPolicy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.i
+.PHONY : src/classifier/TieringPolicy.cpp.i
+
+src/classifier/TieringPolicy.s: src/classifier/TieringPolicy.cpp.s
+.PHONY : src/classifier/TieringPolicy.s
+
+# target to generate assembly for a file
+src/classifier/TieringPolicy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.s
+.PHONY : src/classifier/TieringPolicy.cpp.s
+
 src/core/ObjectManager.o: src/core/ObjectManager.cpp.o
 .PHONY : src/core/ObjectManager.o
 
@@ -225,6 +249,54 @@ src/db/ObjectMetadata.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.s
 .PHONY : src/db/ObjectMetadata.cpp.s
 
+src/migration/AutoTieringEngine.o: src/migration/AutoTieringEngine.cpp.o
+.PHONY : src/migration/AutoTieringEngine.o
+
+# target to build an object file
+src/migration/AutoTieringEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o
+.PHONY : src/migration/AutoTieringEngine.cpp.o
+
+src/migration/AutoTieringEngine.i: src/migration/AutoTieringEngine.cpp.i
+.PHONY : src/migration/AutoTieringEngine.i
+
+# target to preprocess a source file
+src/migration/AutoTieringEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.i
+.PHONY : src/migration/AutoTieringEngine.cpp.i
+
+src/migration/AutoTieringEngine.s: src/migration/AutoTieringEngine.cpp.s
+.PHONY : src/migration/AutoTieringEngine.s
+
+# target to generate assembly for a file
+src/migration/AutoTieringEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.s
+.PHONY : src/migration/AutoTieringEngine.cpp.s
+
+src/migration/MigrationEngine.o: src/migration/MigrationEngine.cpp.o
+.PHONY : src/migration/MigrationEngine.o
+
+# target to build an object file
+src/migration/MigrationEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o
+.PHONY : src/migration/MigrationEngine.cpp.o
+
+src/migration/MigrationEngine.i: src/migration/MigrationEngine.cpp.i
+.PHONY : src/migration/MigrationEngine.i
+
+# target to preprocess a source file
+src/migration/MigrationEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.i
+.PHONY : src/migration/MigrationEngine.cpp.i
+
+src/migration/MigrationEngine.s: src/migration/MigrationEngine.cpp.s
+.PHONY : src/migration/MigrationEngine.s
+
+# target to generate assembly for a file
+src/migration/MigrationEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.s
+.PHONY : src/migration/MigrationEngine.cpp.s
+
 src/storage/StorageManager.o: src/storage/StorageManager.cpp.o
 .PHONY : src/storage/StorageManager.o
 
@@ -285,6 +357,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/classifier/TieringPolicy.o"
+	@echo "... src/classifier/TieringPolicy.i"
+	@echo "... src/classifier/TieringPolicy.s"
 	@echo "... src/core/ObjectManager.o"
 	@echo "... src/core/ObjectManager.i"
 	@echo "... src/core/ObjectManager.s"
@@ -294,6 +369,12 @@ help:
 	@echo "... src/db/ObjectMetadata.o"
 	@echo "... src/db/ObjectMetadata.i"
 	@echo "... src/db/ObjectMetadata.s"
+	@echo "... src/migration/AutoTieringEngine.o"
+	@echo "... src/migration/AutoTieringEngine.i"
+	@echo "... src/migration/AutoTieringEngine.s"
+	@echo "... src/migration/MigrationEngine.o"
+	@echo "... src/migration/MigrationEngine.i"
+	@echo "... src/migration/MigrationEngine.s"
 	@echo "... src/storage/StorageManager.o"
 	@echo "... src/storage/StorageManager.i"
 	@echo "... src/storage/StorageManager.s"
