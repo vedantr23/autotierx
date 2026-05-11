@@ -1,0 +1,3 @@
+/home/vedant/autotierx/build/CMakeFiles/autotierx.dir
+/home/vedant/autotierx/build/CMakeFiles/edit_cache.dir
+/home/vedant/autotierx/build/CMakeFiles/rebuild_cache.dir
