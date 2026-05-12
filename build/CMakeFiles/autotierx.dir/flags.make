@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/vedant/autotierx/include
+CXX_INCLUDES = -I/home/vedant/autotierx/include -I/home/vedant/autotierx/external/Crow/include
 
 CXX_FLAGS = -std=gnu++17
 

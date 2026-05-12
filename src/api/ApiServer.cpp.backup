@@ -1,0 +1,420 @@
+#include "../../external/Crow/include/crow/middlewares/cors.h"
+#include "../../external/Crow/include/crow.h"
+#include <sqlite3.h>
+#include <fstream>
+#include <filesystem>
+#include <algorithm>
+
+#include "../../include/api/ApiServer.hpp"
+#include "../../include/core/ObjectManager.hpp"
+
+namespace autotierx {
+
+void ApiServer::start(
+    StorageManager& manager,
+    ObjectManager& objectManager
+) {
+
+    crow::App<crow::CORSHandler> app;
+
+    auto& cors = app.get_middleware<crow::CORSHandler>();
+
+    cors
+        .global()
+        .headers("Content-Type")
+        .methods("POST"_method, "GET"_method);
+
+    /*
+    =========================================
+    ROOT ROUTE
+    =========================================
+    */
+
+    CROW_ROUTE(app, "/")
+    ([](){
+
+        return "AutoTierX API Server Running";
+    });
+
+    /*
+    =========================================
+    STORAGE TIERS ROUTE
+    =========================================
+    */
+
+    CROW_ROUTE(app, "/tiers")
+    ([&manager]() {
+
+        crow::json::wvalue response;
+
+        auto tiers = manager.getTiers();
+
+        for (size_t i = 0; i < tiers.size(); i++) {
+
+            response[i]["name"] =
+                tiers[i].getName();
+
+            response[i]["path"] =
+                tiers[i].getPath();
+
+            response[i]["capacity"] =
+                tiers[i].getCapacity();
+
+            response[i]["status"] =
+                tiers[i].isAvailable()
+                ? "ONLINE"
+                : "OFFLINE";
+        }
+
+        return response;
+    });
+
+    /*
+    =========================================
+    STORED OBJECTS ROUTE
+    =========================================
+    */
+
+    CROW_ROUTE(app, "/objects")
+    ([]() {
+
+        sqlite3* db;
+
+        crow::json::wvalue response;
+
+        int index = 0;
+
+        int result = sqlite3_open(
+            "/home/vedant/autotierx/metadata/metadata.db",
+            &db
+        );
+
+        if (result != SQLITE_OK) {
+
+            return response;
+        }
+
+        const char* sql =
+            "SELECT object_id, filename, tier, "
+            "size_bytes, access_count, "
+            "last_accessed FROM object_metadata;";
+
+        sqlite3_stmt* stmt;
+
+        sqlite3_prepare_v2(
+            db,
+            sql,
+            -1,
+            &stmt,
+            nullptr
+        );
+
+        while (
+            sqlite3_step(stmt)
+            == SQLITE_ROW
+        ) {
+
+            response[index]["object_id"] =
+                reinterpret_cast<const char*>(
+                    sqlite3_column_text(stmt, 0)
+                );
+
+            response[index]["filename"] =
+                reinterpret_cast<const char*>(
+                    sqlite3_column_text(stmt, 1)
+                );
+
+            response[index]["tier"] =
+                reinterpret_cast<const char*>(
+                    sqlite3_column_text(stmt, 2)
+                );
+
+            response[index]["size_bytes"] =
+                sqlite3_column_int(stmt, 3);
+
+            response[index]["access_count"] =
+                sqlite3_column_int(stmt, 4);
+
+            response[index]["last_accessed"] =
+                reinterpret_cast<const char*>(
+                    sqlite3_column_text(stmt, 5)
+                );
+
+            index++;
+        }
+
+        sqlite3_finalize(stmt);
+
+        sqlite3_close(db);
+
+        return response;
+    });
+
+    /*
+    =========================================
+    HEALTH ROUTE
+    =========================================
+    */
+
+    CROW_ROUTE(app, "/health")
+    ([]() {
+
+        crow::json::wvalue response;
+
+        response["status"] = "healthy";
+
+        response["server"] = "AutoTierX";
+
+        response["version"] = "1.0";
+
+        return response;
+    });
+
+    /*
+    =========================================
+    METRICS ROUTE
+    =========================================
+    */
+
+    CROW_ROUTE(app, "/metrics")
+    ([&manager]() {
+
+        crow::json::wvalue response;
+
+        auto tiers = manager.getTiers();
+
+        int totalCapacity = 0;
+
+        int onlineTiers = 0;
+
+        for (const auto& tier : tiers) {
+
+            totalCapacity +=
+                tier.getCapacity();
+
+            if (tier.isAvailable()) {
+
+                onlineTiers++;
+            }
+        }
+
+        response["total_tiers"] =
+            tiers.size();
+
+        response["online_tiers"] =
+            onlineTiers;
+
+        response["total_capacity_gb"] =
+            totalCapacity;
+
+        return response;
+    });
+
+        /*
+=========================================
+UPLOAD ROUTE
+=========================================
+*/
+
+CROW_ROUTE(app, "/upload")
+.methods("POST"_method)
+([&objectManager](const crow::request& req) {
+
+    try {
+
+        /*
+        =========================================
+        GET FILENAME FROM HEADER
+        =========================================
+        */
+
+        std::string filename =
+            req.get_header_value("X-Filename");
+
+        if (filename.empty()) {
+
+            crow::json::wvalue errorResponse;
+
+            errorResponse["status"] =
+                "error";
+
+            errorResponse["message"] =
+                "Filename header missing";
+
+            return crow::response(
+                400,
+                errorResponse
+            );
+        }
+
+        /*
+        =========================================
+        TEMP FILE PATH
+        =========================================
+        */
+
+        std::string tempPath =
+            "/home/vedant/autotierx/uploads/"
+            + filename;
+
+        /*
+        =========================================
+        SAVE REAL FILE CONTENT
+        =========================================
+        */
+
+        std::ofstream outputFile(
+            tempPath,
+            std::ios::binary
+        );
+
+        outputFile << req.body;
+
+        outputFile.close();
+
+        /*
+        =========================================
+        INGEST INTO HOT TIER
+        =========================================
+        */
+
+        objectManager.ingestObject(
+            tempPath,
+            "/home/vedant/hot-storage"
+        );
+
+        /*
+        =========================================
+        SUCCESS RESPONSE
+        =========================================
+        */
+
+        crow::json::wvalue response;
+
+        response["status"] =
+            "success";
+
+        response["message"] =
+            "File uploaded successfully";
+
+        response["filename"] =
+            filename;
+
+        return crow::response(response);
+
+    } catch (const std::exception& e) {
+
+        crow::json::wvalue errorResponse;
+
+        errorResponse["status"] =
+            "error";
+
+        errorResponse["message"] =
+            e.what();
+
+        return crow::response(
+            500,
+            errorResponse
+        );
+    }
+});
+
+        /*
+        =========================================
+        REMOVE QUOTES
+        =========================================
+        */
+
+        filename.erase(
+            std::remove(
+                filename.begin(),
+                filename.end(),
+                '"'
+            ),
+            filename.end()
+        );
+
+        /*
+        =========================================
+        TEMP PATH
+        =========================================
+        */
+
+        std::string tempPath =
+            "/home/vedant/autotierx/uploads/"
+            + filename;
+
+        /*
+        =========================================
+        SAVE REAL FILE CONTENT
+        =========================================
+        */
+
+        std::ofstream outputFile(
+            tempPath,
+            std::ios::binary
+        );
+
+        outputFile.write(
+            filePart.body.c_str(),
+            filePart.body.size()
+        );
+
+        outputFile.close();
+
+        /*
+        =========================================
+        INGEST INTO HOT TIER
+        =========================================
+        */
+
+        objectManager.ingestObject(
+            tempPath,
+            "/home/vedant/hot-storage"
+        );
+
+        /*
+        =========================================
+        SUCCESS RESPONSE
+        =========================================
+        */
+
+        crow::json::wvalue response;
+
+        response["status"] =
+            "success";
+
+        response["message"] =
+            "File uploaded successfully";
+
+        response["filename"] =
+            filename;
+
+        return crow::response(response);
+
+    } catch (const std::exception& e) {
+
+        crow::json::wvalue errorResponse;
+
+        errorResponse["status"] =
+            "error";
+
+        errorResponse["message"] =
+            e.what();
+
+        return crow::response(
+            500,
+            errorResponse
+        );
+    }
+});
+    /*
+    =========================================
+    START SERVER
+    =========================================
+    */
+
+    app.port(18080).multithreaded().run();
+}
+
+}

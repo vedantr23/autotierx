@@ -160,5 +160,11 @@ CMakeFiles/autotierx.dir/main.cpp.o: /home/vedant/autotierx/main.cpp \
  /home/vedant/autotierx/include/db/DatabaseManager.hpp \
  /usr/include/sqlite3.h \
  /home/vedant/autotierx/include/core/ObjectManager.hpp \
+ /home/vedant/autotierx/include/core/AccessManager.hpp \
  /home/vedant/autotierx/include/migration/MigrationEngine.hpp \
- /home/vedant/autotierx/include/migration/AutoTieringEngine.hpp
+ /home/vedant/autotierx/include/migration/AutoTieringEngine.hpp \
+ /home/vedant/autotierx/include/monitoring/MonitoringEngine.hpp \
+ /home/vedant/autotierx/include/monitoring/../storage/StorageManager.hpp \
+ /home/vedant/autotierx/include/api/ApiServer.hpp \
+ /home/vedant/autotierx/include/api/../storage/StorageManager.hpp \
+ /home/vedant/autotierx/include/utils/Logger.hpp

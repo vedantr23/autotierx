@@ -119,8 +119,20 @@ void ObjectMetadata::setTier(
     tier = newTier;
 }
 
+void ObjectMetadata::setPath(
+    const std::string& newPath
+) {
+    path = newPath;
+}
+
 void ObjectMetadata::incrementAccessCount() {
     accessCount++;
+}
+
+void ObjectMetadata::updateLastAccessed(
+    const std::string& timestamp
+) {
+    lastAccessed = timestamp;
 }
 
 }

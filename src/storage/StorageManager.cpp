@@ -14,4 +14,10 @@ void StorageManager::printAllTiers() const {
     }
 }
 
+const std::vector<StorageTier>&
+StorageManager::getTiers() const {
+
+    return tiers;
+}
+
 }

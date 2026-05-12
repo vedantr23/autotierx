@@ -153,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/api/ApiServer.o: src/api/ApiServer.cpp.o
+.PHONY : src/api/ApiServer.o
+
+# target to build an object file
+src/api/ApiServer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o
+.PHONY : src/api/ApiServer.cpp.o
+
+src/api/ApiServer.i: src/api/ApiServer.cpp.i
+.PHONY : src/api/ApiServer.i
+
+# target to preprocess a source file
+src/api/ApiServer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.i
+.PHONY : src/api/ApiServer.cpp.i
+
+src/api/ApiServer.s: src/api/ApiServer.cpp.s
+.PHONY : src/api/ApiServer.s
+
+# target to generate assembly for a file
+src/api/ApiServer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.s
+.PHONY : src/api/ApiServer.cpp.s
+
 src/classifier/TieringPolicy.o: src/classifier/TieringPolicy.cpp.o
 .PHONY : src/classifier/TieringPolicy.o
 
@@ -176,6 +200,30 @@ src/classifier/TieringPolicy.s: src/classifier/TieringPolicy.cpp.s
 src/classifier/TieringPolicy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.s
 .PHONY : src/classifier/TieringPolicy.cpp.s
+
+src/core/AccessManager.o: src/core/AccessManager.cpp.o
+.PHONY : src/core/AccessManager.o
+
+# target to build an object file
+src/core/AccessManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o
+.PHONY : src/core/AccessManager.cpp.o
+
+src/core/AccessManager.i: src/core/AccessManager.cpp.i
+.PHONY : src/core/AccessManager.i
+
+# target to preprocess a source file
+src/core/AccessManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.i
+.PHONY : src/core/AccessManager.cpp.i
+
+src/core/AccessManager.s: src/core/AccessManager.cpp.s
+.PHONY : src/core/AccessManager.s
+
+# target to generate assembly for a file
+src/core/AccessManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.s
+.PHONY : src/core/AccessManager.cpp.s
 
 src/core/ObjectManager.o: src/core/ObjectManager.cpp.o
 .PHONY : src/core/ObjectManager.o
@@ -297,6 +345,30 @@ src/migration/MigrationEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.s
 .PHONY : src/migration/MigrationEngine.cpp.s
 
+src/monitoring/MonitoringEngine.o: src/monitoring/MonitoringEngine.cpp.o
+.PHONY : src/monitoring/MonitoringEngine.o
+
+# target to build an object file
+src/monitoring/MonitoringEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o
+.PHONY : src/monitoring/MonitoringEngine.cpp.o
+
+src/monitoring/MonitoringEngine.i: src/monitoring/MonitoringEngine.cpp.i
+.PHONY : src/monitoring/MonitoringEngine.i
+
+# target to preprocess a source file
+src/monitoring/MonitoringEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.i
+.PHONY : src/monitoring/MonitoringEngine.cpp.i
+
+src/monitoring/MonitoringEngine.s: src/monitoring/MonitoringEngine.cpp.s
+.PHONY : src/monitoring/MonitoringEngine.s
+
+# target to generate assembly for a file
+src/monitoring/MonitoringEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.s
+.PHONY : src/monitoring/MonitoringEngine.cpp.s
+
 src/storage/StorageManager.o: src/storage/StorageManager.cpp.o
 .PHONY : src/storage/StorageManager.o
 
@@ -345,6 +417,54 @@ src/storage/StorageTier.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.s
 .PHONY : src/storage/StorageTier.cpp.s
 
+src/utils/Logger.o: src/utils/Logger.cpp.o
+.PHONY : src/utils/Logger.o
+
+# target to build an object file
+src/utils/Logger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o
+.PHONY : src/utils/Logger.cpp.o
+
+src/utils/Logger.i: src/utils/Logger.cpp.i
+.PHONY : src/utils/Logger.i
+
+# target to preprocess a source file
+src/utils/Logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/Logger.cpp.i
+.PHONY : src/utils/Logger.cpp.i
+
+src/utils/Logger.s: src/utils/Logger.cpp.s
+.PHONY : src/utils/Logger.s
+
+# target to generate assembly for a file
+src/utils/Logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/Logger.cpp.s
+.PHONY : src/utils/Logger.cpp.s
+
+src/utils/TierUtils.o: src/utils/TierUtils.cpp.o
+.PHONY : src/utils/TierUtils.o
+
+# target to build an object file
+src/utils/TierUtils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o
+.PHONY : src/utils/TierUtils.cpp.o
+
+src/utils/TierUtils.i: src/utils/TierUtils.cpp.i
+.PHONY : src/utils/TierUtils.i
+
+# target to preprocess a source file
+src/utils/TierUtils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.i
+.PHONY : src/utils/TierUtils.cpp.i
+
+src/utils/TierUtils.s: src/utils/TierUtils.cpp.s
+.PHONY : src/utils/TierUtils.s
+
+# target to generate assembly for a file
+src/utils/TierUtils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.s
+.PHONY : src/utils/TierUtils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -357,9 +477,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/api/ApiServer.o"
+	@echo "... src/api/ApiServer.i"
+	@echo "... src/api/ApiServer.s"
 	@echo "... src/classifier/TieringPolicy.o"
 	@echo "... src/classifier/TieringPolicy.i"
 	@echo "... src/classifier/TieringPolicy.s"
+	@echo "... src/core/AccessManager.o"
+	@echo "... src/core/AccessManager.i"
+	@echo "... src/core/AccessManager.s"
 	@echo "... src/core/ObjectManager.o"
 	@echo "... src/core/ObjectManager.i"
 	@echo "... src/core/ObjectManager.s"
@@ -375,12 +501,21 @@ help:
 	@echo "... src/migration/MigrationEngine.o"
 	@echo "... src/migration/MigrationEngine.i"
 	@echo "... src/migration/MigrationEngine.s"
+	@echo "... src/monitoring/MonitoringEngine.o"
+	@echo "... src/monitoring/MonitoringEngine.i"
+	@echo "... src/monitoring/MonitoringEngine.s"
 	@echo "... src/storage/StorageManager.o"
 	@echo "... src/storage/StorageManager.i"
 	@echo "... src/storage/StorageManager.s"
 	@echo "... src/storage/StorageTier.o"
 	@echo "... src/storage/StorageTier.i"
 	@echo "... src/storage/StorageTier.s"
+	@echo "... src/utils/Logger.o"
+	@echo "... src/utils/Logger.i"
+	@echo "... src/utils/Logger.s"
+	@echo "... src/utils/TierUtils.o"
+	@echo "... src/utils/TierUtils.i"
+	@echo "... src/utils/TierUtils.s"
 .PHONY : help
 
 

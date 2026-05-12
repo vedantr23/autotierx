@@ -24,8 +24,12 @@ std::string StorageTier::getPath() const {
     return path;
 }
 
-double StorageTier::getCapacity() const {
-    return capacityGB;
+int StorageTier::getCapacity() const {
+    return static_cast<int>(capacityGB);
+}
+
+bool StorageTier::isAvailable() const {
+    return online;
 }
 
 bool StorageTier::isOnline() const {

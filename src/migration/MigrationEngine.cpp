@@ -7,13 +7,14 @@ namespace fs = std::filesystem;
 
 namespace autotierx {
 
-bool MigrationEngine::migrateObject(
-    const std::string& sourcePath,
+void MigrationEngine::migrateObject(
+    ObjectMetadata& object,
     const std::string& destinationTier
 ) {
 
     try {
 
+        std::string sourcePath = object.getPath();
         fs::path source(sourcePath);
 
         if (!fs::exists(source)) {
@@ -22,7 +23,7 @@ bool MigrationEngine::migrateObject(
                 << "Source object not found."
                 << std::endl;
 
-            return false;
+            return;
         }
 
         std::string filename = source.filename();
@@ -54,7 +55,7 @@ bool MigrationEngine::migrateObject(
                 << "Migration verification failed."
                 << std::endl;
 
-            return false;
+            return;
         }
 
         /*
@@ -64,6 +65,9 @@ bool MigrationEngine::migrateObject(
         */
 
         fs::remove(source);
+
+        object.setPath(destinationPath);
+        object.setTier("WARM");
 
         /*
         =====================================
@@ -87,7 +91,7 @@ bool MigrationEngine::migrateObject(
             << destinationPath
             << std::endl;
 
-        return true;
+        return;
 
     } catch (const std::exception& e) {
 
@@ -96,7 +100,7 @@ bool MigrationEngine::migrateObject(
             << e.what()
             << std::endl;
 
-        return false;
+        return;
     }
 }
 

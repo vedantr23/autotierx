@@ -2,14 +2,15 @@
 #define MIGRATION_ENGINE_HPP
 
 #include <string>
+#include "../db/ObjectMetadata.hpp"
 
 namespace autotierx {
 
 class MigrationEngine {
 public:
 
-    bool migrateObject(
-        const std::string& sourcePath,
+    void migrateObject(
+        ObjectMetadata& object,
         const std::string& destinationTier
     );
 };

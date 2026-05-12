@@ -31,7 +31,8 @@ public:
 
     std::string getName() const;
     std::string getPath() const;
-    double getCapacity() const;
+    int getCapacity() const;
+    bool isAvailable() const;
     bool isOnline() const;
     TierType getType() const;
 

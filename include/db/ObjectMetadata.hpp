@@ -77,7 +77,11 @@ public:
 
     void setTier(const std::string& newTier);
 
+    void setPath(const std::string& newPath);
+
     void incrementAccessCount();
+
+    void updateLastAccessed(const std::string& timestamp);
 };
 
 }

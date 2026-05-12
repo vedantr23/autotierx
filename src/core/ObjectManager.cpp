@@ -110,7 +110,9 @@ void ObjectManager::ingestObject(
             filename,
             destinationPath,
             "HOT",
-            size
+            size,
+            0,
+            std::ctime(&now)
         );
 
         /*

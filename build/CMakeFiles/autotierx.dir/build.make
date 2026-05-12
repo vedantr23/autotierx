@@ -139,10 +139,24 @@ CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/core/ObjectManager.cpp -o CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s
 
+CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o: /home/vedant/autotierx/src/core/AccessManager.cpp
+CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o -MF CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o.d -o CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o -c /home/vedant/autotierx/src/core/AccessManager.cpp
+
+CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/core/AccessManager.cpp > CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.i
+
+CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/core/AccessManager.cpp -o CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.s
+
 CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o: CMakeFiles/autotierx.dir/flags.make
 CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o: /home/vedant/autotierx/src/db/DatabaseManager.cpp
 CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o -MF CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o.d -o CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o -c /home/vedant/autotierx/src/db/DatabaseManager.cpp
 
 CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.s: cmake_force
 CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o: CMakeFiles/autotierx.dir/flags.make
 CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o: /home/vedant/autotierx/src/migration/MigrationEngine.cpp
 CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o -MF CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o.d -o CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o -c /home/vedant/autotierx/src/migration/MigrationEngine.cpp
 
 CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.s: cmake_force
 CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o: CMakeFiles/autotierx.dir/flags.make
 CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o: /home/vedant/autotierx/src/classifier/TieringPolicy.cpp
 CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o -MF CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o.d -o CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o -c /home/vedant/autotierx/src/classifier/TieringPolicy.cpp
 
 CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.s: cmake_force
 CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o: CMakeFiles/autotierx.dir/flags.make
 CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o: /home/vedant/autotierx/src/migration/AutoTieringEngine.cpp
 CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o -MF CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o.d -o CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o -c /home/vedant/autotierx/src/migration/AutoTieringEngine.cpp
 
 CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.i: cmake_force
@@ -195,6 +209,62 @@ CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/migration/AutoTieringEngine.cpp -o CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.s
 
+CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o: /home/vedant/autotierx/src/utils/Logger.cpp
+CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o -MF CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o.d -o CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o -c /home/vedant/autotierx/src/utils/Logger.cpp
+
+CMakeFiles/autotierx.dir/src/utils/Logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/utils/Logger.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/utils/Logger.cpp > CMakeFiles/autotierx.dir/src/utils/Logger.cpp.i
+
+CMakeFiles/autotierx.dir/src/utils/Logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/utils/Logger.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/utils/Logger.cpp -o CMakeFiles/autotierx.dir/src/utils/Logger.cpp.s
+
+CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o: /home/vedant/autotierx/src/utils/TierUtils.cpp
+CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o -MF CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o.d -o CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o -c /home/vedant/autotierx/src/utils/TierUtils.cpp
+
+CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/utils/TierUtils.cpp > CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.i
+
+CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/utils/TierUtils.cpp -o CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.s
+
+CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o: /home/vedant/autotierx/src/monitoring/MonitoringEngine.cpp
+CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o -MF CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o.d -o CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o -c /home/vedant/autotierx/src/monitoring/MonitoringEngine.cpp
+
+CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/monitoring/MonitoringEngine.cpp > CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.i
+
+CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/monitoring/MonitoringEngine.cpp -o CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.s
+
+CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o: CMakeFiles/autotierx.dir/flags.make
+CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o: /home/vedant/autotierx/src/api/ApiServer.cpp
+CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o: CMakeFiles/autotierx.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o -MF CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o.d -o CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o -c /home/vedant/autotierx/src/api/ApiServer.cpp
+
+CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vedant/autotierx/src/api/ApiServer.cpp > CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.i
+
+CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vedant/autotierx/src/api/ApiServer.cpp -o CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.s
+
 # Object files for target autotierx
 autotierx_OBJECTS = \
 "CMakeFiles/autotierx.dir/main.cpp.o" \
@@ -202,10 +272,15 @@ autotierx_OBJECTS = \
 "CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o" \
 "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o" \
 "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o" \
+"CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o" \
 "CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o" \
 "CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o" \
 "CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o" \
-"CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o"
+"CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o" \
+"CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o" \
+"CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o" \
+"CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o" \
+"CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o"
 
 # External object files for target autotierx
 autotierx_EXTERNAL_OBJECTS =
@@ -215,13 +290,18 @@ autotierx: CMakeFiles/autotierx.dir/src/storage/StorageTier.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/storage/StorageManager.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o
 autotierx: CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/utils/Logger.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/utils/TierUtils.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/monitoring/MonitoringEngine.cpp.o
+autotierx: CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o
 autotierx: CMakeFiles/autotierx.dir/build.make
 autotierx: CMakeFiles/autotierx.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable autotierx"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vedant/autotierx/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable autotierx"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/autotierx.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

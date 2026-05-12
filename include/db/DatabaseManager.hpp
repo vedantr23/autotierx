@@ -3,10 +3,14 @@
 
 #include <sqlite3.h>
 #include <string>
+#include <vector>
+#include "ObjectMetadata.hpp"
 
 namespace autotierx {
 
 class DatabaseManager {
+    std::vector<ObjectMetadata> fetchAllObjects();
+
 private:
     sqlite3* db;
 
@@ -23,7 +27,24 @@ public:
         const std::string& filename,
         const std::string& path,
         const std::string& tier,
-        long sizeBytes
+        long sizeBytes,
+        int accessCount,
+        const std::string& lastAccessed
+    );
+
+    void updateObjectTier(
+        const std::string& objectId,
+        const std::string& newTier
+    );
+
+    void updateObjectPath(
+        const std::string& objectId,
+        const std::string& newPath
+    );
+
+    void updateAccessCount(
+        const std::string& objectId,
+        int accessCount
     );
 
     void printAllMetadata();

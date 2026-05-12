@@ -1,6 +1,12 @@
 #include "../../include/migration/AutoTieringEngine.hpp"
+#include "../../include/db/DatabaseManager.hpp"
+
+#include "../../include/migration/MigrationEngine.hpp"
+#include "../../include/utils/TierUtils.hpp"
+#include "../../include/utils/Logger.hpp"
 
 #include <iostream>
+#include <filesystem>
 
 namespace autotierx {
 
@@ -97,10 +103,51 @@ void AutoTieringEngine::evaluateAndMigrate(
         if (targetTier != object.getTier()) {
 
             std::cout
-                << "[AUTO MIGRATION TRIGGERED]"
+                << "[AUTO MIGRATION STARTED]"
                 << std::endl;
 
+            std::string sourcePath =
+                object.getPath();
+
+            std::string filename =
+                object.getFilename();
+
+            std::string targetPath =
+                TierUtils::getTierPath(targetTier);
+
+            MigrationEngine migrationEngine;
+
+            migrationEngine.migrateObject(
+                object,
+                targetPath
+            );
+
             object.setTier(targetTier);
+
+            object.setPath(
+                targetPath + "/" + filename
+            );
+
+            DatabaseManager dbManager;
+
+            dbManager.connect(
+                "/home/vedant/autotierx/metadata/metadata.db"
+            );
+
+            dbManager.updateObjectTier(
+                object.getObjectId(),
+                targetTier
+            );
+
+            dbManager.updateObjectPath(
+                object.getObjectId(),
+                targetPath + "/" + filename
+            );
+
+            Logger::info(
+                "Auto-tier migration completed for " +
+                filename
+            );
 
         } else {
 

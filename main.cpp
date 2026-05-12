@@ -5,12 +5,28 @@
 #include "db/ObjectMetadata.hpp"
 #include "db/DatabaseManager.hpp"
 #include "core/ObjectManager.hpp"
+#include "core/AccessManager.hpp"
 #include "migration/MigrationEngine.hpp"
 #include "migration/AutoTieringEngine.hpp"
+#include "monitoring/MonitoringEngine.hpp"
+#include "api/ApiServer.hpp"
+#include "utils/Logger.hpp"
 
 using namespace autotierx;
 
 int main() {
+
+    Logger::info(
+    "AutoTierX system initialized"
+);
+
+Logger::warning(
+    "Warm tier usage approaching threshold"
+);
+
+Logger::error(
+    "Cold tier latency detected"
+);
 
     /*
     =========================================
@@ -114,6 +130,18 @@ int main() {
 
     /*
     =========================================
+    OBJECT ACCESS ENGINE
+    =========================================
+    */
+
+    AccessManager accessManager;
+
+    auto& objects = objectManager.getObjects();
+
+    accessManager.accessObject(objects[0]);
+
+    /*
+    =========================================
     DATABASE MANAGER
     =========================================
     */
@@ -139,7 +167,7 @@ int main() {
     MigrationEngine migrationEngine;
 
     migrationEngine.migrateObject(
-        "/home/vedant/hot-storage/sample.txt",
+        objectManager.getObjects()[0],
         "/media/vedant/warm"
     );
 
@@ -157,6 +185,15 @@ int main() {
 
     /*
     =========================================
+    MONITORING ENGINE
+    =========================================
+    */
+
+    MonitoringEngine monitoringEngine;
+    monitoringEngine.monitorStorage(manager);
+
+    /*
+    =========================================
     FINISHED
     =========================================
     */
@@ -165,6 +202,18 @@ int main() {
     std::cout
         << "===== AUTOTIERX EXECUTION COMPLETE ====="
         << std::endl;
+
+    /*
+    =========================================
+    API SERVER
+    =========================================
+    */
+
+    ApiServer apiServer;
+    apiServer.start(
+        manager,
+        objectManager
+    );
 
     return 0;
 }
