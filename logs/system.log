@@ -368,3 +368,27 @@
  : Cold tier latency detected
 [INFO] Tue May 12 21:26:50 2026
  : Auto-tier migration completed for sample.txt
+[INFO] Sun May 17 19:52:16 2026
+ : AutoTierX system initialized
+[WARNING] Sun May 17 19:52:16 2026
+ : Warm tier usage approaching threshold
+[ERROR] Sun May 17 19:52:16 2026
+ : Cold tier latency detected
+[INFO] Sun May 17 19:52:16 2026
+ : Auto-tier migration completed for sample.txt
+[INFO] Sun May 17 20:48:36 2026
+ : AutoTierX system initialized
+[WARNING] Sun May 17 20:48:36 2026
+ : Warm tier usage approaching threshold
+[ERROR] Sun May 17 20:48:36 2026
+ : Cold tier latency detected
+[INFO] Sun May 17 20:48:36 2026
+ : Auto-tier migration completed for sample.txt
+[INFO] Sun May 17 21:19:55 2026
+ : AutoTierX system initialized
+[WARNING] Sun May 17 21:19:55 2026
+ : Warm tier usage approaching threshold
+[ERROR] Sun May 17 21:19:55 2026
+ : Cold tier latency detected
+[INFO] Sun May 17 21:19:55 2026
+ : Auto-tier migration completed for sample.txt

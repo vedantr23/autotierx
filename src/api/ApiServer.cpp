@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <algorithm>
 #include <sstream>
+#include <vector>
 #include <cstdlib>
 
 #include "../../include/api/ApiServer.hpp"
@@ -30,6 +31,24 @@ static std::string urlDecode(const std::string& encoded) {
     return decoded;
 }
 
+static std::vector<std::string> getStoragePaths(const std::string& filename) {
+    return {
+        "/home/vedant/hot-storage/" + filename,
+        "/media/vedant/warm/" + filename,
+        "/media/vedant/cold/" + filename,
+        "/home/vedant/archive-storage/" + filename,
+        "/home/vedant/autotierx/uploads/" + filename
+    };
+}
+
+static std::string findExistingPath(const std::string& filename) {
+    for (const auto& path : getStoragePaths(filename)) {
+        if (std::filesystem::exists(path)) {
+            return path;
+        }
+    }
+    return {};
+}
 
 namespace autotierx {
 
@@ -68,9 +87,7 @@ void ApiServer::start(
     CROW_ROUTE(app, "/tiers")
     ([&manager]() {
 
-        crow::json::wvalue response(
-            crow::json::wvalue::list()
-        );
+        crow::json::wvalue response = crow::json::wvalue::list();
 
         auto tiers = manager.getTiers();
 
@@ -85,7 +102,7 @@ void ApiServer::start(
                 ? "ONLINE"
                 : "OFFLINE";
 
-            response.push_back(std::move(item));
+            response[response.size()] = std::move(item);
         }
 
         return response;
@@ -102,9 +119,7 @@ void ApiServer::start(
 
         sqlite3* db;
 
-        crow::json::wvalue response(
-            crow::json::wvalue::list()
-        );
+        crow::json::wvalue response = crow::json::wvalue::list();
 
         int result = sqlite3_open(
             "/home/vedant/autotierx/metadata/metadata.db",
@@ -136,15 +151,40 @@ void ApiServer::start(
             == SQLITE_ROW
         ) {
 
+            std::string filename = reinterpret_cast<const char*>(
+                sqlite3_column_text(stmt, 1)
+            );
+
+            if (filename.empty()) {
+                continue;
+            }
+
+            std::string actualPath = findExistingPath(filename);
+            if (actualPath.empty()) {
+                const char* deleteSql =
+                    "DELETE FROM object_metadata WHERE filename = ?;";
+                sqlite3_stmt* deleteStmt = nullptr;
+                if (sqlite3_prepare_v2(db, deleteSql, -1, &deleteStmt, nullptr) == SQLITE_OK) {
+                    sqlite3_bind_text(
+                        deleteStmt,
+                        1,
+                        filename.c_str(),
+                        -1,
+                        SQLITE_TRANSIENT
+                    );
+                    sqlite3_step(deleteStmt);
+                    sqlite3_finalize(deleteStmt);
+                }
+                continue;
+            }
+
             crow::json::wvalue item;
 
             item["object_id"] = reinterpret_cast<const char*>(
                 sqlite3_column_text(stmt, 0)
             );
 
-            item["filename"] = reinterpret_cast<const char*>(
-                sqlite3_column_text(stmt, 1)
-            );
+            item["filename"] = filename;
 
             item["tier"] = reinterpret_cast<const char*>(
                 sqlite3_column_text(stmt, 2)
@@ -156,7 +196,7 @@ void ApiServer::start(
                 sqlite3_column_text(stmt, 5)
             );
 
-            response.push_back(std::move(item));
+            response[response.size()] = std::move(item);
         }
 
         sqlite3_finalize(stmt);
@@ -543,6 +583,7 @@ CROW_ROUTE(app, "/delete/<string>")
             );
 
             sqlite3_step(stmt);
+            bool metadataDeleted = sqlite3_changes(db) > 0;
             sqlite3_finalize(stmt);
             sqlite3_close(db);
 
@@ -555,7 +596,7 @@ CROW_ROUTE(app, "/delete/<string>")
             crow::json::wvalue response;
 
             response["status"] =
-                deleted
+                (deleted || metadataDeleted)
                 ? "deleted"
                 : "not_found";
 
@@ -577,7 +618,8 @@ CROW_ROUTE(app, "/delete/<string>")
             resp.set_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
             resp.set_header("Access-Control-Allow-Headers", "Content-Type, X-Filename");
             return resp;
-    */
+        }
+    });
 
     app.port(18080).multithreaded().run();
 }

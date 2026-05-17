@@ -140,22 +140,37 @@ function App() {
     };
 
     const deleteFile = async (filename) => {
+
         try {
+
             const response = await fetch(
-                `${API_BASE}/delete/${encodeURIComponent(filename)}`,
-                { method: "DELETE" }
+
+                `http://localhost:18080/delete/${filename}`,
+
+                {
+                    method: "DELETE"
+                }
             );
 
-            const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.message || "Delete failed");
-            }
+            const data = await response.json();
 
-            setStatusMessage(`Deleted ${filename} successfully.`);
-            await refreshDashboard();
+            console.log(data);
+
+            /*
+            =========================================
+            REFRESH UI
+            =========================================
+            */
+
+            await fetchObjects();
+
+            await fetchMetrics();
+
+            await fetchTiers();
+
         } catch (error) {
-            console.error("Delete error", error);
-            setStatusMessage(`Delete failed: ${error.message}`);
+
+            console.error(error);
         }
     };
 
