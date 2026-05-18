@@ -8,6 +8,8 @@
 #include "core/AccessManager.hpp"
 #include "migration/MigrationEngine.hpp"
 #include "migration/AutoTieringEngine.hpp"
+#include "core/BackgroundTieringDaemon.hpp"
+#include "core/PolicyManager.hpp"
 #include "monitoring/MonitoringEngine.hpp"
 #include "api/ApiServer.hpp"
 #include "utils/Logger.hpp"
@@ -35,6 +37,11 @@ Logger::error(
     */
 
     StorageManager manager;
+
+    PolicyManager policyManager;
+    policyManager.loadPolicies(
+        "/home/vedant/autotierx/config/policies.json"
+    );
 
     StorageTier hot(
         TierType::HOT,
@@ -166,10 +173,14 @@ Logger::error(
 
     MigrationEngine migrationEngine;
 
-    migrationEngine.migrateObject(
+    bool migOk = migrationEngine.migrateObject(
         objectManager.getObjects()[0],
         "/media/vedant/warm"
     );
+
+    if (!migOk) {
+        std::cout << "Initial migration failed or skipped." << std::endl;
+    }
 
     /*
     =========================================
@@ -208,6 +219,17 @@ Logger::error(
     API SERVER
     =========================================
     */
+
+    AutoTieringEngine autoTieringEngine;
+
+    BackgroundTieringDaemon daemon(
+        dbManager,
+        migrationEngine,
+        manager,
+        policyManager
+    );
+
+    daemon.start();
 
     ApiServer apiServer;
     apiServer.start(

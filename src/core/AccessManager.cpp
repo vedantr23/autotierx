@@ -1,5 +1,6 @@
 #include "../../include/core/AccessManager.hpp"
 #include "../../include/db/DatabaseManager.hpp"
+#include "../../include/utils/Logger.hpp"
 
 #include <iostream>
 #include <chrono>
@@ -23,13 +24,12 @@ void AccessManager::accessObject(
         object.getAccessCount()
     );
 
-    auto now =
-        std::chrono::system_clock::to_time_t(
-            std::chrono::system_clock::now()
-        );
+    std::string now = Logger::getCurrentTimestamp();
 
-    object.updateLastAccessed(
-        std::ctime(&now)
+    object.updateLastAccessed(now);
+    dbManager.updateLastAccessed(
+        object.getObjectId(),
+        now
     );
 
     std::cout << std::endl;

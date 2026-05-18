@@ -20,6 +20,8 @@ public:
         const std::string& message
     );
 
+    static std::string getCurrentTimestamp();
+
 private:
 
     static void writeLog(

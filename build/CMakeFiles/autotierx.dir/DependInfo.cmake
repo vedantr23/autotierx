@@ -10,9 +10,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/vedant/autotierx/main.cpp" "CMakeFiles/autotierx.dir/main.cpp.o" "gcc" "CMakeFiles/autotierx.dir/main.cpp.o.d"
   "/home/vedant/autotierx/src/api/ApiServer.cpp" "CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o.d"
+  "/home/vedant/autotierx/src/classification/ClassificationEngine.cpp" "CMakeFiles/autotierx.dir/src/classification/ClassificationEngine.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/classification/ClassificationEngine.cpp.o.d"
   "/home/vedant/autotierx/src/classifier/TieringPolicy.cpp" "CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/classifier/TieringPolicy.cpp.o.d"
   "/home/vedant/autotierx/src/core/AccessManager.cpp" "CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.o.d"
+  "/home/vedant/autotierx/src/core/AuditLogger.cpp" "CMakeFiles/autotierx.dir/src/core/AuditLogger.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/AuditLogger.cpp.o.d"
+  "/home/vedant/autotierx/src/core/BackgroundTieringDaemon.cpp" "CMakeFiles/autotierx.dir/src/core/BackgroundTieringDaemon.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/BackgroundTieringDaemon.cpp.o.d"
   "/home/vedant/autotierx/src/core/ObjectManager.cpp" "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.o.d"
+  "/home/vedant/autotierx/src/core/PolicyManager.cpp" "CMakeFiles/autotierx.dir/src/core/PolicyManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/core/PolicyManager.cpp.o.d"
   "/home/vedant/autotierx/src/db/DatabaseManager.cpp" "CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/db/DatabaseManager.cpp.o.d"
   "/home/vedant/autotierx/src/db/ObjectMetadata.cpp" "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/db/ObjectMetadata.cpp.o.d"
   "/home/vedant/autotierx/src/migration/AutoTieringEngine.cpp" "CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o" "gcc" "CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o.d"

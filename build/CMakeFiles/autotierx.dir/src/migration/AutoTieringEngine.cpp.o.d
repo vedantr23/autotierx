@@ -160,6 +160,7 @@ CMakeFiles/autotierx.dir/src/migration/AutoTieringEngine.cpp.o: \
  /usr/include/c++/13/bits/vector.tcc \
  /home/vedant/autotierx/src/migration/../../include/db/DatabaseManager.hpp \
  /usr/include/sqlite3.h \
+ /home/vedant/autotierx/src/migration/../../include/classification/ClassificationEngine.hpp \
  /home/vedant/autotierx/src/migration/../../include/migration/MigrationEngine.hpp \
  /home/vedant/autotierx/src/migration/../../include/utils/TierUtils.hpp \
  /home/vedant/autotierx/src/migration/../../include/utils/Logger.hpp \

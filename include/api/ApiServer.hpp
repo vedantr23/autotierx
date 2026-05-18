@@ -2,6 +2,7 @@
 
 #include "../storage/StorageManager.hpp"
 #include "../core/ObjectManager.hpp"
+#include "../core/AuditLogger.hpp"
 
 namespace autotierx {
 
@@ -11,7 +12,8 @@ public:
 
     void start(
         StorageManager& manager,
-        ObjectManager& objectManager
+        ObjectManager& objectManager,
+        AuditLogger& auditLogger
     );
 };
 

@@ -18,6 +18,9 @@ function App() {
     const [tiers, setTiers] = useState([]);
     const [objects, setObjects] = useState([]);
     const [metrics, setMetrics] = useState({});
+    const [auditLogs, setAuditLogs] = useState([]);
+    const [auditFilter, setAuditFilter] = useState("all");
+    const [view, setView] = useState("dashboard");
     const [selectedFile, setSelectedFile] = useState(null);
     const [statusMessage, setStatusMessage] = useState("");
 
@@ -40,6 +43,16 @@ function App() {
     const API_BASE = "http://localhost:18080";
 
     const COLORS = ["#3b82f6", "#22c55e", "#eab308", "#ef4444"];
+
+    const EVENT_COLORS = {
+        upload: "#22c55e",
+        delete: "#ef4444",
+        migrate: "#3b82f6",
+        warning: "#f59e0b",
+        error: "#f97316",
+        daemon: "#60a5fa",
+        all: "#64748b"
+    };
 
     const normalizeResponse = useCallback(
         (data) => (Array.isArray(data) ? data : Object.values(data || {})),
@@ -76,9 +89,44 @@ function App() {
         }
     }, [API_BASE]);
 
+    const fetchAuditLogs = useCallback(async () => {
+        try {
+            const response = await axios.get(`${API_BASE}/audit-logs`);
+            setAuditLogs(Array.isArray(response.data) ? response.data : []);
+        } catch (error) {
+            console.error("Failed to load audit logs", error);
+            setStatusMessage("Unable to load audit logs.");
+        }
+    }, [API_BASE]);
+
+    const filteredAuditLogs = auditLogs.filter((entry) =>
+        auditFilter === "all" || entry.event_type === auditFilter
+    );
+
+    const getEventLabel = (type) => {
+        switch (type) {
+            case "upload":
+                return "UPLOAD";
+            case "delete":
+                return "DELETE";
+            case "migrate":
+                return "MIGRATION";
+            case "warning":
+                return "WARNING";
+            case "error":
+                return "ERROR";
+            case "daemon":
+                return "SYSTEM";
+            default:
+                return type.toUpperCase();
+        }
+    };
+
+    const getEventColor = (type) => EVENT_COLORS[type] || EVENT_COLORS.all;
+
     const refreshDashboard = useCallback(async () => {
-        await Promise.all([fetchTiers(), fetchObjects(), fetchMetrics()]);
-    }, [fetchTiers, fetchObjects, fetchMetrics]);
+        await Promise.all([fetchTiers(), fetchObjects(), fetchMetrics(), fetchAuditLogs()]);
+    }, [fetchTiers, fetchObjects, fetchMetrics, fetchAuditLogs]);
 
     useEffect(() => {
         const loadDashboard = async () => {
@@ -86,12 +134,43 @@ function App() {
         };
 
         void loadDashboard();
-        const interval = setInterval(() => {
-            void refreshDashboard();
-        }, 2500);
 
-        return () => clearInterval(interval);
+        const socket = new WebSocket("ws://localhost:18080/ws");
+
+        socket.onopen = () => {
+            console.log("WebSocket connected");
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                if (event.data === "refresh") {
+                    void refreshDashboard();
+                }
+            } catch (e) {
+                console.error("WS message handler error", e);
+            }
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket disconnected");
+        };
+
+        return () => {
+            try {
+                if (socket && socket.readyState === WebSocket.OPEN) {
+                    socket.close();
+                }
+            } catch (e) {
+                // ignore
+            }
+        };
     }, [refreshDashboard]);
+
+    useEffect(() => {
+        if (view === "audit") {
+            void fetchAuditLogs();
+        }
+    }, [view, fetchAuditLogs]);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -156,17 +235,7 @@ function App() {
 
             console.log(data);
 
-            /*
-            =========================================
-            REFRESH UI
-            =========================================
-            */
-
-            await fetchObjects();
-
-            await fetchMetrics();
-
-            await fetchTiers();
+            await refreshDashboard();
 
         } catch (error) {
 
@@ -200,7 +269,24 @@ function App() {
 
             {statusMessage && <div className="status-banner">{statusMessage}</div>}
 
-            <section className="metrics-grid">
+            <div className="view-tabs">
+                <button
+                    className={`tab-button ${view === "dashboard" ? "active" : ""}`}
+                    onClick={() => setView("dashboard")}
+                >
+                    Dashboard
+                </button>
+                <button
+                    className={`tab-button ${view === "audit" ? "active" : ""}`}
+                    onClick={() => setView("audit")}
+                >
+                    Audit Trail
+                </button>
+            </div>
+
+            {view === "dashboard" ? (
+                <>
+                    <section className="metrics-grid">
                 <article className="metric-card">
                     <span className="metric-label">Total Tiers</span>
                     <p className="metric-value">{metrics.total_tiers ?? 0}</p>
@@ -315,6 +401,61 @@ function App() {
                     ))}
                 </div>
             </section>
+                </>
+            ) : (
+                <section className="section-panel audit-panel">
+                    <div className="section-header audit-header">
+                        <div>
+                            <p className="eyebrow">Audit Trail</p>
+                            <h2>Live Event Timeline</h2>
+                        </div>
+                        <div className="audit-filter-row">
+                            {["all", "upload", "delete", "migrate", "warning", "error", "daemon"].map((type) => (
+                                <button
+                                    key={type}
+                                    className={`filter-button ${auditFilter === type ? "active" : ""}`}
+                                    onClick={() => setAuditFilter(type)}
+                                >
+                                    {type === "all" ? "All" : getEventLabel(type)}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="audit-console">
+                        {filteredAuditLogs.length > 0 ? (
+                            filteredAuditLogs.map((entry, index) => (
+                                <div key={index} className="audit-line">
+                                    <div className="audit-line-header">
+                                        <span className="audit-time">{entry.timestamp}</span>
+                                        <span
+                                            className="event-badge"
+                                            style={{ backgroundColor: getEventColor(entry.event_type) }}
+                                        >
+                                            {getEventLabel(entry.event_type)}
+                                        </span>
+                                        <span className="audit-status">{entry.status?.toUpperCase()}</span>
+                                    </div>
+                                    <div className="audit-line-body">
+                                        <strong>{entry.filename || "System"}</strong>
+                                        {entry.message ? ` — ${entry.message}` : ""}
+                                        {(entry.source_tier || entry.destination_tier) && (
+                                            <div className="audit-line-paths">
+                                                {entry.source_tier && <span>{entry.source_tier}</span>}
+                                                {entry.source_tier && entry.destination_tier && <span> → </span>}
+                                                {entry.destination_tier && <span>{entry.destination_tier}</span>}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="panel-card empty-state">
+                                <p>No audit events have been recorded yet.</p>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
         </div>
     );
 }

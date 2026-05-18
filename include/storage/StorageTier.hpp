@@ -37,6 +37,7 @@ public:
     TierType getType() const;
 
     void printInfo() const;
+    bool checkHealth();
 };
 
 }

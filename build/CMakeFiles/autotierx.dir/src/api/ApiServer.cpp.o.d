@@ -894,9 +894,16 @@ CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.o: \
  /home/vedant/autotierx/src/api/../../external/Crow/include/crow/http_server.h \
  /home/vedant/autotierx/external/Crow/include/crow/version.h \
  /home/vedant/autotierx/src/api/../../external/Crow/include/crow/app.h \
- /usr/include/sqlite3.h \
+ /usr/include/sqlite3.h /usr/include/c++/13/set \
+ /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_multiset.h \
  /home/vedant/autotierx/src/api/../../include/api/ApiServer.hpp \
  /home/vedant/autotierx/src/api/../../include/api/../storage/StorageManager.hpp \
  /home/vedant/autotierx/src/api/../../include/api/../storage/StorageTier.hpp \
  /home/vedant/autotierx/src/api/../../include/api/../core/ObjectManager.hpp \
- /home/vedant/autotierx/src/api/../../include/api/../core/../db/ObjectMetadata.hpp
+ /home/vedant/autotierx/src/api/../../include/api/../core/../db/ObjectMetadata.hpp \
+ /home/vedant/autotierx/src/api/../../include/api/../core/AuditLogger.hpp \
+ /home/vedant/autotierx/src/api/../../include/api/../core/AuditEvent.hpp \
+ /home/vedant/autotierx/src/api/../../include/api/WebsocketBroadcaster.hpp \
+ /home/vedant/autotierx/src/api/../../include/db/DatabaseManager.hpp \
+ /home/vedant/autotierx/src/api/../../include/utils/Logger.hpp

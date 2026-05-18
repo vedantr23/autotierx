@@ -176,4 +176,12 @@ CMakeFiles/autotierx.dir/src/migration/MigrationEngine.cpp.o: \
  /usr/include/c++/13/bits/allocated_ptr.h \
  /usr/include/c++/13/bits/unique_ptr.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h
+ /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /home/vedant/autotierx/src/migration/../../include/db/DatabaseManager.hpp \
+ /usr/include/sqlite3.h /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc \
+ /home/vedant/autotierx/src/migration/../../include/api/WebsocketBroadcaster.hpp \
+ /home/vedant/autotierx/src/migration/../../include/utils/Logger.hpp

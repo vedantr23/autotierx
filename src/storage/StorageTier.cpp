@@ -1,4 +1,5 @@
 #include "../../include/storage/StorageTier.hpp"
+#include <filesystem>
 #include <iostream>
 
 namespace autotierx {
@@ -45,6 +46,13 @@ void StorageTier::printInfo() const {
     std::cout << "Path: " << path << std::endl;
     std::cout << "Capacity: " << capacityGB << " GB" << std::endl;
     std::cout << "Status: " << (online ? "ONLINE" : "OFFLINE") << std::endl;
+}
+
+bool StorageTier::checkHealth() {
+
+    online = std::filesystem::exists(path);
+
+    return online;
 }
 
 }

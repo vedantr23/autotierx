@@ -14,6 +14,7 @@ public:
     void addTier(const StorageTier& tier);
     void printAllTiers() const;
     const std::vector<StorageTier>& getTiers() const;
+    void refreshTierHealth();
 };
 
 }

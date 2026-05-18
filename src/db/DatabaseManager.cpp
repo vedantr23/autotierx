@@ -89,6 +89,99 @@ void DatabaseManager::createMetadataTable() {
             << "Metadata table ready."
             << std::endl;
     }
+
+    const char* migrationTableSQL = R"(
+
+        CREATE TABLE IF NOT EXISTS migration_history (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            filename TEXT,
+
+            source_tier TEXT,
+
+            destination_tier TEXT,
+
+            timestamp TEXT
+        );
+
+)";
+
+    sqlite3_exec(
+
+        db,
+
+        migrationTableSQL,
+
+        nullptr,
+
+        nullptr,
+
+        &errorMessage
+    );
+
+    const char* auditTableSQL = R"(
+
+        CREATE TABLE IF NOT EXISTS audit_logs (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT,
+            event_type TEXT,
+            filename TEXT,
+            source_tier TEXT,
+            destination_tier TEXT,
+            status TEXT,
+            message TEXT
+        );
+
+)";
+
+    sqlite3_exec(
+
+        db,
+
+        auditTableSQL,
+
+        nullptr,
+
+        nullptr,
+
+        &errorMessage
+    );
+
+    const char* normalizeMetadataSQL = R"(
+
+        UPDATE object_metadata
+        SET last_accessed = datetime('now')
+        WHERE last_accessed IS NULL
+          OR last_accessed NOT GLOB '????-??-?? ??:??:??';
+
+    )";
+
+    sqlite3_exec(
+        db,
+        normalizeMetadataSQL,
+        nullptr,
+        nullptr,
+        &errorMessage
+    );
+
+    const char* normalizeAuditSQL = R"(
+
+        UPDATE audit_logs
+        SET timestamp = datetime('now')
+        WHERE timestamp IS NULL
+          OR timestamp NOT GLOB '????-??-?? ??:??:??';
+
+    )";
+
+    sqlite3_exec(
+        db,
+        normalizeAuditSQL,
+        nullptr,
+        nullptr,
+        &errorMessage
+    );
 }
 
 void DatabaseManager::insertObjectMetadata(
@@ -140,6 +233,98 @@ void DatabaseManager::insertObjectMetadata(
             << "Metadata inserted into database."
             << std::endl;
     }
+}
+
+void DatabaseManager::insertMigrationHistory(
+
+    const std::string& filename,
+
+    const std::string& sourceTier,
+
+    const std::string& destinationTier
+) {
+
+    std::string sql =
+
+        "INSERT INTO migration_history "
+        "(filename, source_tier, destination_tier, timestamp) VALUES ('" +
+
+        filename + "', '" +
+
+        sourceTier + "', '" +
+
+        destinationTier + "', datetime('now'));";
+
+    char* errorMessage = nullptr;
+
+    sqlite3_exec(
+
+        db,
+
+        sql.c_str(),
+
+        nullptr,
+
+        nullptr,
+
+        &errorMessage
+    );
+}
+
+void DatabaseManager::insertAuditLog(
+    const std::string& eventType,
+    const std::string& filename,
+    const std::string& sourceTier,
+    const std::string& destinationTier,
+    const std::string& status,
+    const std::string& message
+) {
+    const char* sql =
+        "INSERT INTO audit_logs "
+        "(timestamp, event_type, filename, source_tier, destination_tier, status, message) "
+        "VALUES (datetime('now'), ?, ?, ?, ?, ?, ?);";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
+        sqlite3_bind_text(stmt, 1, eventType.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 2, filename.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 3, sourceTier.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 4, destinationTier.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 5, status.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 6, message.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+    }
+}
+
+std::vector<AuditLogEntry> DatabaseManager::getAuditLogs() {
+    std::vector<AuditLogEntry> logs;
+    const char* sql =
+        "SELECT id, timestamp, event_type, filename, source_tier, destination_tier, status, message "
+        "FROM audit_logs ORDER BY id DESC LIMIT 200;";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
+        auto textValue = [&](int column) {
+            const unsigned char* rawText = sqlite3_column_text(stmt, column);
+            return rawText ? std::string(reinterpret_cast<const char*>(rawText)) : std::string();
+        };
+
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            AuditLogEntry entry;
+            entry.id = sqlite3_column_int(stmt, 0);
+            entry.timestamp = textValue(1);
+            entry.event_type = textValue(2);
+            entry.filename = textValue(3);
+            entry.source_tier = textValue(4);
+            entry.destination_tier = textValue(5);
+            entry.status = textValue(6);
+            entry.message = textValue(7);
+            logs.push_back(entry);
+        }
+        sqlite3_finalize(stmt);
+    }
+    return logs;
 }
 
 static int callback(
@@ -199,7 +384,7 @@ FETCH ALL OBJECTS FROM DATABASE
 */
 
 std::vector<ObjectMetadata>
-DatabaseManager::fetchAllObjects() {
+DatabaseManager::getAllObjects() {
 
     std::vector<ObjectMetadata> objects;
 
@@ -211,7 +396,9 @@ DatabaseManager::fetchAllObjects() {
         "filename, "
         "path, "
         "tier, "
-        "size_bytes "
+        "size_bytes, "
+        "access_count, "
+        "last_accessed "
         "FROM object_metadata;";
 
     int result =
@@ -260,15 +447,23 @@ DatabaseManager::fetchAllObjects() {
         long size =
             sqlite3_column_int64(statement, 4);
 
+        int accessCount =
+            sqlite3_column_int(statement, 5);
+
+        std::string lastAccessed =
+            reinterpret_cast<const char*>(
+                sqlite3_column_text(statement, 6)
+            );
+
         ObjectMetadata metadata(
             objectId,
             filename,
             path,
             tier,
             size,
-            0,
+            accessCount,
             "unknown",
-            "unknown",
+            lastAccessed,
             "checksum"
         );
 
@@ -336,6 +531,26 @@ void DatabaseManager::updateAccessCount(
         "UPDATE object_metadata SET access_count=" +
         std::to_string(accessCount) +
         " WHERE object_id='" +
+        objectId + "';";
+
+    char* errorMessage = nullptr;
+
+    sqlite3_exec(
+        db,
+        sql.c_str(),
+        nullptr,
+        nullptr,
+        &errorMessage
+    );
+}
+
+void DatabaseManager::updateLastAccessed(
+    const std::string& objectId,
+    const std::string& timestamp
+) {
+    std::string sql =
+        "UPDATE object_metadata SET last_accessed='" +
+        timestamp + "' WHERE object_id='" +
         objectId + "';";
 
     char* errorMessage = nullptr;

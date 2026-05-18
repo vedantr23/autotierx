@@ -1,6 +1,7 @@
 #include "../../external/Crow/include/crow/middlewares/cors.h"
 #include "../../external/Crow/include/crow.h"
 #include <sqlite3.h>
+#include <set>
 #include <fstream>
 #include <filesystem>
 #include <algorithm>
@@ -9,7 +10,11 @@
 #include <cstdlib>
 
 #include "../../include/api/ApiServer.hpp"
+#include "../../include/api/WebsocketBroadcaster.hpp"
 #include "../../include/core/ObjectManager.hpp"
+#include "../../include/core/AuditLogger.hpp"
+#include "../../include/db/DatabaseManager.hpp"
+#include "../../include/utils/Logger.hpp"
 
 static std::string urlDecode(const std::string& encoded) {
     std::string decoded;
@@ -52,9 +57,20 @@ static std::string findExistingPath(const std::string& filename) {
 
 namespace autotierx {
 
+std::set<crow::websocket::connection*> clients;
+
+void broadcastUpdate(const std::string& message) {
+
+    for (auto client : clients) {
+
+        client->send_text(message);
+    }
+}
+
 void ApiServer::start(
     StorageManager& manager,
-    ObjectManager& objectManager
+    ObjectManager& objectManager,
+    AuditLogger& auditLogger
 ) {
 
     crow::App<crow::CORSHandler> app;
@@ -65,6 +81,18 @@ void ApiServer::start(
         .global()
         .headers("Content-Type", "X-Filename")
         .methods("POST"_method, "GET"_method, "DELETE"_method);
+
+    DatabaseManager startupDbManager;
+    if (startupDbManager.connect("/home/vedant/autotierx/metadata/metadata.db")) {
+        for (const auto& log : startupDbManager.getAuditLogs()) {
+            AuditEvent event;
+            event.timestamp = log.timestamp;
+            event.eventType = log.event_type;
+            event.objectName = log.filename;
+            event.details = log.message;
+            auditLogger.addEvent(event);
+        }
+    }
 
     /*
     =========================================
@@ -274,7 +302,9 @@ UPLOAD ROUTE
 
 CROW_ROUTE(app, "/upload")
 .methods("POST"_method)
-([&objectManager](const crow::request& req) {
+([&objectManager, &auditLogger](const crow::request& req) {
+
+    std::string filename;
 
     try {
 
@@ -284,10 +314,12 @@ CROW_ROUTE(app, "/upload")
         =========================================
         */
 
-        std::string filename =
+        filename =
             req.get_header_value("X-Filename");
 
         if (filename.empty()) {
+
+            Logger::warning("Upload failed: missing X-Filename header");
 
             crow::json::wvalue errorResponse;
 
@@ -339,6 +371,24 @@ CROW_ROUTE(app, "/upload")
             "/home/vedant/hot-storage"
         );
 
+        DatabaseManager dbManager;
+        dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        dbManager.insertAuditLog(
+            "upload",
+            filename,
+            "",
+            "HOT",
+            "success",
+            "Uploaded file to HOT tier"
+        );
+
+        AuditEvent uploadEvent;
+        uploadEvent.timestamp = Logger::getCurrentTimestamp();
+        uploadEvent.eventType = "upload";
+        uploadEvent.objectName = filename;
+        uploadEvent.details = "Uploaded into HOT tier";
+        auditLogger.logEvent(uploadEvent);
+
         /*
         =========================================
         SUCCESS RESPONSE
@@ -356,9 +406,33 @@ CROW_ROUTE(app, "/upload")
         response["filename"] =
             filename;
 
+        autotierx::broadcastUpdate("refresh");
+
+        Logger::info("Upload successful: " + filename);
+
         return crow::response(response);
 
     } catch (const std::exception& e) {
+
+        Logger::error(std::string("Upload failed for ") + filename + ": " + e.what());
+
+        DatabaseManager dbManager;
+        dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        dbManager.insertAuditLog(
+            "upload",
+            filename,
+            "",
+            "HOT",
+            "failure",
+            std::string("Upload failed: ") + e.what()
+        );
+
+        AuditEvent failedUploadEvent;
+        failedUploadEvent.timestamp = Logger::getCurrentTimestamp();
+        failedUploadEvent.eventType = "upload";
+        failedUploadEvent.objectName = filename;
+        failedUploadEvent.details = std::string("Upload failed: ") + e.what();
+        auditLogger.logEvent(failedUploadEvent);
 
         crow::json::wvalue errorResponse;
 
@@ -382,11 +456,13 @@ DOWNLOAD ROUTE
 */
 
 CROW_ROUTE(app, "/download/<string>")
-([&objectManager](const std::string& filename) {
+([&objectManager, &auditLogger](const std::string& filename) {
+
+    std::string decodedFilename;
 
     try {
 
-        std::string decodedFilename = urlDecode(filename);
+        decodedFilename = urlDecode(filename);
 
         /*
         =========================================
@@ -433,6 +509,19 @@ CROW_ROUTE(app, "/download/<string>")
 
         if (foundPath.empty()) {
 
+            Logger::warning("Download failed: file not found: " + decodedFilename);
+
+            DatabaseManager dbManager;
+            dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+            dbManager.insertAuditLog(
+                "download",
+                decodedFilename,
+                "",
+                "",
+                "failure",
+                "File not found"
+            );
+
             return crow::response(
                 404,
                 "File not found"
@@ -477,9 +566,48 @@ CROW_ROUTE(app, "/download/<string>")
 
         response.body = buffer.str();
 
+        Logger::info("Download completed: " + decodedFilename + " from " + foundPath);
+
+        DatabaseManager dbManager;
+        dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        dbManager.insertAuditLog(
+            "download",
+            decodedFilename,
+            "",
+            "",
+            "success",
+            "Downloaded from " + foundPath
+        );
+
+        AuditEvent downloadEvent;
+        downloadEvent.timestamp = Logger::getCurrentTimestamp();
+        downloadEvent.eventType = "download";
+        downloadEvent.objectName = decodedFilename;
+        downloadEvent.details = std::string("Downloaded from ") + foundPath;
+        auditLogger.logEvent(downloadEvent);
+
         return response;
 
     } catch (const std::exception& e) {
+
+        Logger::error(std::string("Download error for ") + decodedFilename + ": " + e.what());
+        DatabaseManager dbManager;
+        dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        dbManager.insertAuditLog(
+            "download",
+            decodedFilename,
+            "",
+            "",
+            "failure",
+            std::string("Download error: ") + e.what()
+        );
+
+        AuditEvent failedDownloadEvent;
+        failedDownloadEvent.timestamp = Logger::getCurrentTimestamp();
+        failedDownloadEvent.eventType = "download";
+        failedDownloadEvent.objectName = decodedFilename;
+        failedDownloadEvent.details = std::string("Download error: ") + e.what();
+        auditLogger.logEvent(failedDownloadEvent);
 
         return crow::response(
             500,
@@ -496,9 +624,7 @@ DELETE OBJECT ROUTE
 
 CROW_ROUTE(app, "/delete/<string>")
     .methods("DELETE"_method, "OPTIONS"_method)
-    ([](const crow::request& req, const std::string& filename) {
-
-        if (req.method == crow::HTTPMethod::Options) {
+([&auditLogger](const crow::request& req, const std::string& filename) {
             crow::response resp;
             resp.code = 204;
             resp.set_header("Access-Control-Allow-Origin", "*");
@@ -604,14 +730,44 @@ CROW_ROUTE(app, "/delete/<string>")
                 filename;
 
             crow::response resp(response);
-            
+
             resp.set_header("Access-Control-Allow-Origin", "*");
             resp.set_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
             resp.set_header("Access-Control-Allow-Headers", "Content-Type, X-Filename");
 
+            if (deleted || metadataDeleted) {
+                Logger::info("Delete completed: " + decodedFilename);
+                DatabaseManager dbManager;
+                dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+                dbManager.insertAuditLog(
+                    "delete",
+                    decodedFilename,
+                    "",
+                    "",
+                    "success",
+                    "Deleted object and metadata"
+                );
+            } else {
+                Logger::warning("Delete request for missing file: " + decodedFilename);
+                DatabaseManager dbManager;
+                dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+                dbManager.insertAuditLog(
+                    "delete",
+                    decodedFilename,
+                    "",
+                    "",
+                    "failure",
+                    "File not found for delete"
+                );
+            }
+
+            autotierx::broadcastUpdate("refresh");
+
             return resp;
 
         } catch (const std::exception& e) {
+
+            Logger::error(std::string("Delete error for ") + filename + ": " + e.what());
 
             crow::response resp(500, e.what());
             resp.set_header("Access-Control-Allow-Origin", "*");
@@ -619,6 +775,150 @@ CROW_ROUTE(app, "/delete/<string>")
             resp.set_header("Access-Control-Allow-Headers", "Content-Type, X-Filename");
             return resp;
         }
+    });
+
+    /*
+=========================================
+WEBSOCKET ROUTE
+=========================================
+*/
+
+    CROW_WEBSOCKET_ROUTE(app, "/ws")
+
+    .onopen([](crow::websocket::connection& conn) {
+
+        std::cout
+            << "WebSocket client connected"
+            << std::endl;
+
+        clients.insert(&conn);
+    })
+
+    .onclose([](crow::websocket::connection& conn,
+
+                const std::string& reason,
+
+                uint16_t code) {
+
+        std::cout
+            << "WebSocket client disconnected"
+            << std::endl;
+
+        clients.erase(&conn);
+    })
+
+    .onmessage([](crow::websocket::connection& conn,
+
+                  const std::string& data,
+
+                  bool is_binary) {
+
+        conn.send_text("ACK");
+    });
+
+
+    CROW_ROUTE(app, "/migration-history")
+    ([]() {
+
+        sqlite3* db;
+
+        crow::json::wvalue response;
+
+        sqlite3_open(
+
+            "/home/vedant/autotierx/metadata/metadata.db",
+
+            &db
+        );
+
+        const char* sql =
+
+            "SELECT filename, source_tier, "
+            "destination_tier, timestamp "
+            "FROM migration_history;";
+
+        sqlite3_stmt* stmt;
+
+        sqlite3_prepare_v2(
+
+            db,
+
+            sql,
+
+            -1,
+
+            &stmt,
+
+            nullptr
+        );
+
+        int index = 0;
+
+        while (
+
+            sqlite3_step(stmt)
+            == SQLITE_ROW
+        ) {
+
+            response[index]["filename"] =
+
+                reinterpret_cast<const char*>(
+
+                    sqlite3_column_text(stmt, 0)
+                );
+
+            response[index]["source"] =
+
+                reinterpret_cast<const char*>(
+
+                    sqlite3_column_text(stmt, 1)
+                );
+
+            response[index]["destination"] =
+
+                reinterpret_cast<const char*>(
+
+                    sqlite3_column_text(stmt, 2)
+                );
+
+            response[index]["timestamp"] =
+
+                reinterpret_cast<const char*>(
+
+                    sqlite3_column_text(stmt, 3)
+                );
+
+            index++;
+        }
+
+        sqlite3_finalize(stmt);
+
+        sqlite3_close(db);
+
+        return response;
+    });
+
+    CROW_ROUTE(app, "/audit-logs")
+    ([]() {
+        DatabaseManager dbManager;
+        dbManager.connect("/home/vedant/autotierx/metadata/metadata.db");
+        auto logs = dbManager.getAuditLogs();
+
+        crow::json::wvalue response = crow::json::wvalue::list();
+        for (const auto& log : logs) {
+            crow::json::wvalue item;
+            item["id"] = log.id;
+            item["timestamp"] = log.timestamp;
+            item["event_type"] = log.event_type;
+            item["filename"] = log.filename;
+            item["source_tier"] = log.source_tier;
+            item["destination_tier"] = log.destination_tier;
+            item["status"] = log.status;
+            item["message"] = log.message;
+            response[response.size()] = std::move(item);
+        }
+
+        return response;
     });
 
     app.port(18080).multithreaded().run();

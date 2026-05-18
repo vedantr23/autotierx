@@ -20,4 +20,12 @@ StorageManager::getTiers() const {
     return tiers;
 }
 
+void StorageManager::refreshTierHealth() {
+
+    for (auto& tier : tiers) {
+
+        tier.checkHealth();
+    }
+}
+
 }

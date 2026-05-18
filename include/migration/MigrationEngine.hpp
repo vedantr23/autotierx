@@ -9,7 +9,7 @@ namespace autotierx {
 class MigrationEngine {
 public:
 
-    void migrateObject(
+    bool migrateObject(
         ObjectMetadata& object,
         const std::string& destinationTier
     );

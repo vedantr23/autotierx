@@ -1,0 +1,26 @@
+{
+    "extensions": {
+
+        ".mp4": "COLD",
+        ".mkv": "COLD",
+        ".avi": "COLD",
+
+        ".zip": "ARCHIVE",
+        ".tar": "ARCHIVE",
+        ".rar": "ARCHIVE",
+
+        ".txt": "HOT",
+        ".pdf": "HOT",
+        ".docx": "HOT"
+    },
+
+    "lifecycle": {
+
+        "warm_after_days": 7,
+
+        "cold_after_days": 15,
+
+        "archive_after_days": 30
+    }
+}
+

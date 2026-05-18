@@ -177,6 +177,30 @@ src/api/ApiServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/api/ApiServer.cpp.s
 .PHONY : src/api/ApiServer.cpp.s
 
+src/classification/ClassificationEngine.o: src/classification/ClassificationEngine.cpp.o
+.PHONY : src/classification/ClassificationEngine.o
+
+# target to build an object file
+src/classification/ClassificationEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classification/ClassificationEngine.cpp.o
+.PHONY : src/classification/ClassificationEngine.cpp.o
+
+src/classification/ClassificationEngine.i: src/classification/ClassificationEngine.cpp.i
+.PHONY : src/classification/ClassificationEngine.i
+
+# target to preprocess a source file
+src/classification/ClassificationEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classification/ClassificationEngine.cpp.i
+.PHONY : src/classification/ClassificationEngine.cpp.i
+
+src/classification/ClassificationEngine.s: src/classification/ClassificationEngine.cpp.s
+.PHONY : src/classification/ClassificationEngine.s
+
+# target to generate assembly for a file
+src/classification/ClassificationEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/classification/ClassificationEngine.cpp.s
+.PHONY : src/classification/ClassificationEngine.cpp.s
+
 src/classifier/TieringPolicy.o: src/classifier/TieringPolicy.cpp.o
 .PHONY : src/classifier/TieringPolicy.o
 
@@ -225,6 +249,54 @@ src/core/AccessManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AccessManager.cpp.s
 .PHONY : src/core/AccessManager.cpp.s
 
+src/core/AuditLogger.o: src/core/AuditLogger.cpp.o
+.PHONY : src/core/AuditLogger.o
+
+# target to build an object file
+src/core/AuditLogger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AuditLogger.cpp.o
+.PHONY : src/core/AuditLogger.cpp.o
+
+src/core/AuditLogger.i: src/core/AuditLogger.cpp.i
+.PHONY : src/core/AuditLogger.i
+
+# target to preprocess a source file
+src/core/AuditLogger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AuditLogger.cpp.i
+.PHONY : src/core/AuditLogger.cpp.i
+
+src/core/AuditLogger.s: src/core/AuditLogger.cpp.s
+.PHONY : src/core/AuditLogger.s
+
+# target to generate assembly for a file
+src/core/AuditLogger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/AuditLogger.cpp.s
+.PHONY : src/core/AuditLogger.cpp.s
+
+src/core/BackgroundTieringDaemon.o: src/core/BackgroundTieringDaemon.cpp.o
+.PHONY : src/core/BackgroundTieringDaemon.o
+
+# target to build an object file
+src/core/BackgroundTieringDaemon.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/BackgroundTieringDaemon.cpp.o
+.PHONY : src/core/BackgroundTieringDaemon.cpp.o
+
+src/core/BackgroundTieringDaemon.i: src/core/BackgroundTieringDaemon.cpp.i
+.PHONY : src/core/BackgroundTieringDaemon.i
+
+# target to preprocess a source file
+src/core/BackgroundTieringDaemon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/BackgroundTieringDaemon.cpp.i
+.PHONY : src/core/BackgroundTieringDaemon.cpp.i
+
+src/core/BackgroundTieringDaemon.s: src/core/BackgroundTieringDaemon.cpp.s
+.PHONY : src/core/BackgroundTieringDaemon.s
+
+# target to generate assembly for a file
+src/core/BackgroundTieringDaemon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/BackgroundTieringDaemon.cpp.s
+.PHONY : src/core/BackgroundTieringDaemon.cpp.s
+
 src/core/ObjectManager.o: src/core/ObjectManager.cpp.o
 .PHONY : src/core/ObjectManager.o
 
@@ -248,6 +320,30 @@ src/core/ObjectManager.s: src/core/ObjectManager.cpp.s
 src/core/ObjectManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/ObjectManager.cpp.s
 .PHONY : src/core/ObjectManager.cpp.s
+
+src/core/PolicyManager.o: src/core/PolicyManager.cpp.o
+.PHONY : src/core/PolicyManager.o
+
+# target to build an object file
+src/core/PolicyManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/PolicyManager.cpp.o
+.PHONY : src/core/PolicyManager.cpp.o
+
+src/core/PolicyManager.i: src/core/PolicyManager.cpp.i
+.PHONY : src/core/PolicyManager.i
+
+# target to preprocess a source file
+src/core/PolicyManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/PolicyManager.cpp.i
+.PHONY : src/core/PolicyManager.cpp.i
+
+src/core/PolicyManager.s: src/core/PolicyManager.cpp.s
+.PHONY : src/core/PolicyManager.s
+
+# target to generate assembly for a file
+src/core/PolicyManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autotierx.dir/build.make CMakeFiles/autotierx.dir/src/core/PolicyManager.cpp.s
+.PHONY : src/core/PolicyManager.cpp.s
 
 src/db/DatabaseManager.o: src/db/DatabaseManager.cpp.o
 .PHONY : src/db/DatabaseManager.o
@@ -480,15 +576,27 @@ help:
 	@echo "... src/api/ApiServer.o"
 	@echo "... src/api/ApiServer.i"
 	@echo "... src/api/ApiServer.s"
+	@echo "... src/classification/ClassificationEngine.o"
+	@echo "... src/classification/ClassificationEngine.i"
+	@echo "... src/classification/ClassificationEngine.s"
 	@echo "... src/classifier/TieringPolicy.o"
 	@echo "... src/classifier/TieringPolicy.i"
 	@echo "... src/classifier/TieringPolicy.s"
 	@echo "... src/core/AccessManager.o"
 	@echo "... src/core/AccessManager.i"
 	@echo "... src/core/AccessManager.s"
+	@echo "... src/core/AuditLogger.o"
+	@echo "... src/core/AuditLogger.i"
+	@echo "... src/core/AuditLogger.s"
+	@echo "... src/core/BackgroundTieringDaemon.o"
+	@echo "... src/core/BackgroundTieringDaemon.i"
+	@echo "... src/core/BackgroundTieringDaemon.s"
 	@echo "... src/core/ObjectManager.o"
 	@echo "... src/core/ObjectManager.i"
 	@echo "... src/core/ObjectManager.s"
+	@echo "... src/core/PolicyManager.o"
+	@echo "... src/core/PolicyManager.i"
+	@echo "... src/core/PolicyManager.s"
 	@echo "... src/db/DatabaseManager.o"
 	@echo "... src/db/DatabaseManager.i"
 	@echo "... src/db/DatabaseManager.s"

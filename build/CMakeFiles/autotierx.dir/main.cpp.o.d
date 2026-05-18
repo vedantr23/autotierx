@@ -163,8 +163,35 @@ CMakeFiles/autotierx.dir/main.cpp.o: /home/vedant/autotierx/main.cpp \
  /home/vedant/autotierx/include/core/AccessManager.hpp \
  /home/vedant/autotierx/include/migration/MigrationEngine.hpp \
  /home/vedant/autotierx/include/migration/AutoTieringEngine.hpp \
+ /home/vedant/autotierx/include/core/BackgroundTieringDaemon.hpp \
+ /home/vedant/autotierx/include/core/../db/DatabaseManager.hpp \
+ /home/vedant/autotierx/include/core/../migration/MigrationEngine.hpp \
+ /home/vedant/autotierx/include/core/../storage/StorageManager.hpp \
+ /home/vedant/autotierx/include/core/PolicyManager.hpp \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/cstdint \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/include/c++/13/limits /usr/include/c++/13/ctime \
+ /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/atomic \
+ /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /home/vedant/autotierx/include/monitoring/MonitoringEngine.hpp \
  /home/vedant/autotierx/include/monitoring/../storage/StorageManager.hpp \
  /home/vedant/autotierx/include/api/ApiServer.hpp \
  /home/vedant/autotierx/include/api/../storage/StorageManager.hpp \
+ /home/vedant/autotierx/include/api/../core/AuditLogger.hpp \
+ /home/vedant/autotierx/include/api/../core/AuditEvent.hpp \
  /home/vedant/autotierx/include/utils/Logger.hpp

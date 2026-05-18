@@ -1,5 +1,6 @@
 #include "../../include/core/ObjectManager.hpp"
 #include "../../include/db/DatabaseManager.hpp"
+#include "../../include/utils/Logger.hpp"
 
 #include <filesystem>
 #include <iostream>
@@ -60,10 +61,7 @@ void ObjectManager::ingestObject(
         =====================================
         */
 
-        auto now =
-            std::chrono::system_clock::to_time_t(
-                std::chrono::system_clock::now()
-            );
+        std::string now = Logger::getCurrentTimestamp();
 
         /*
         =====================================
@@ -78,8 +76,8 @@ void ObjectManager::ingestObject(
             "HOT",
             size,
             0,
-            std::ctime(&now),
-            std::ctime(&now),
+            now,
+            now,
             "dummy-checksum"
         );
 
@@ -112,7 +110,7 @@ void ObjectManager::ingestObject(
             "HOT",
             size,
             0,
-            std::ctime(&now)
+            now
         );
 
         /*

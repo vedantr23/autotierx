@@ -1,5 +1,6 @@
 #include "../../include/migration/AutoTieringEngine.hpp"
 #include "../../include/db/DatabaseManager.hpp"
+#include "../../include/classification/ClassificationEngine.hpp"
 
 #include "../../include/migration/MigrationEngine.hpp"
 #include "../../include/utils/TierUtils.hpp"
@@ -66,10 +67,15 @@ void AutoTieringEngine::evaluateAndMigrate(
         << "===== AUTO TIERING ENGINE ====="
         << std::endl;
 
+    ClassificationEngine classifier;
+
     for (auto& object : objects) {
 
         std::string targetTier =
-            determineTargetTier(object);
+
+            classifier.determineOptimalTier(
+                object
+            );
 
         /*
         =========================================
@@ -117,37 +123,52 @@ void AutoTieringEngine::evaluateAndMigrate(
 
             MigrationEngine migrationEngine;
 
-            migrationEngine.migrateObject(
-                object,
-                targetPath
-            );
+            bool migrationSuccess =
 
-            object.setTier(targetTier);
+                migrationEngine.migrateObject(
+                    object,
+                    targetPath
+                );
 
-            object.setPath(
-                targetPath + "/" + filename
-            );
+            if (migrationSuccess) {
 
-            DatabaseManager dbManager;
+                object.setTier(targetTier);
 
-            dbManager.connect(
-                "/home/vedant/autotierx/metadata/metadata.db"
-            );
+                object.setPath(
+                    targetPath + "/" + filename
+                );
 
-            dbManager.updateObjectTier(
-                object.getObjectId(),
-                targetTier
-            );
+                DatabaseManager dbManager;
 
-            dbManager.updateObjectPath(
-                object.getObjectId(),
-                targetPath + "/" + filename
-            );
+                dbManager.connect(
+                    "/home/vedant/autotierx/metadata/metadata.db"
+                );
 
-            Logger::info(
-                "Auto-tier migration completed for " +
-                filename
-            );
+                dbManager.updateObjectTier(
+                    object.getObjectId(),
+                    targetTier
+                );
+
+                dbManager.updateObjectPath(
+                    object.getObjectId(),
+                    targetPath + "/" + filename
+                );
+
+                std::cout
+                    << "[INFO] Migration successful"
+                    << std::endl;
+
+                Logger::info(
+                    "Auto-tier migration completed for " +
+                    filename
+                );
+
+            } else {
+
+                std::cout
+                    << "[WARNING] Migration failed"
+                    << std::endl;
+            }
 
         } else {
 
